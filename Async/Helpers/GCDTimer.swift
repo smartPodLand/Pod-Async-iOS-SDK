@@ -8,7 +8,8 @@
 
 import Foundation
 
-
+// this is the timer class, that will handle the complexity of timer functionality
+// it will uses many times on Async and also on Chat maybe
 class RepeatingTimer {
     
     let timeInterval: TimeInterval

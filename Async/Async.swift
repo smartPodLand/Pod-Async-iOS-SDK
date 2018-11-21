@@ -9,23 +9,28 @@
 import Foundation
 import Starscream
 import SwiftyJSON
+import SwiftyBeaver
 
+// use this property to get putput logs
+let log = SwiftyBeaver.self
 
+// this is the Async class that will handles Asynchronous messaging
 public class Async {
     
     public weak var delegate: AsyncDelegates?
+    
     
     private var socketAddress:          String      // socket address
     private var serverName:             String      // server to register on
     private var deviceId:               String      // the user current device id
     
     private var appId:                  String      //
-    private var peerId:                 Int         //
+    private var peerId:                 Int         // pper id of the user on the server
     private var messageTtl:             Int         //
-    private var connectionRetryInterval:Int         //
-    private var reconnectOnClose:       Bool        // should
+    private var reconnectOnClose:       Bool        // should i try to reconnet the socket whenever socket is close?
+    private var connectionRetryInterval:Int         // how many times to try to connet the socket
     
-    // Async initializer
+    // MARK: - Async initializer
     public init(socketAddress: String,
                 serverName: String,
                 deviceId: String,
@@ -64,6 +69,9 @@ public class Async {
         } else {
             self.reconnectOnClose = true
         }
+        
+        // firt step is to config output logs
+        configLogs()
     }
     
     
@@ -96,9 +104,97 @@ public class Async {
     var lastSentMessageTimeoutIdTimer:  RepeatingTimer?
     var socketRealTimeStatusInterval:   RepeatingTimer?
     
+    var t = RepeatingTimer(timeInterval: 0)
+    
+    var checkIfSocketHasOpennedTimeoutIdTimer:  RepeatingTimer?
+    var socketReconnectRetryIntervalTimer:      RepeatingTimer?
+    var socketReconnectCheckTimer:              RepeatingTimer?
+    
+    var registerServerTimeoutIdTimer: RepeatingTimer?
+    
     var socket: WebSocket?
     
-    public func createSucket() {
+    
+    // MARK: - config Logs
+    func configLogs() {
+        // add log destinations. at least one is needed!
+        
+        // 1-------------------------------------------------------------
+        // MARK: - log to Xcode Console:
+        let console = ConsoleDestination()
+        
+        // setup format of loging to Xcode Console
+        let consoleFormatString: String = """
+
+________________________________________________________________________________________________
+||--------------------------------------------------------------------------------------------||
+|| $C$L                                                                                  ||
+||  _____________________________________________________________________                     ||
+|| |     time     | line | class.function\t\t\t\t\t| thread
+|| | $U |  $l  | $N.$F\t\t| $T
+||  ---------------------------------------------------------------------                     ||
+|| | Message:                                                                                 ||
+|| | $M
+||  ---------------------------------------------------------------------                     ||
+|| | Additional information:                                                                  ||
+|| | $X
+||  ---------------------------------------------------------------------                     ||
+||____________________________________________________________________________________________||
+------------------------------------------------------------------------------------------------
+
+"""
+        console.format = consoleFormatString
+        
+        /*
+         // set global minLevel (verbose, info, debug, warning, error)
+         console.minLevel = .error
+         */
+        
+        /*
+         // set Path Filter to a certain class
+         let filter1 = Filters.Path.contains("UnicornViewController",minLevel: .debug)
+         console.addFilter(filter1)
+         */
+        
+        /*
+         // set Function Filter to a certain function of a certain class
+         let filter1 = Filters.Path.contains("UnicornViewController", required: true)
+         let filter2 = Filters.Function.contains("viewDidLoad", required: true)
+         console.addFilter(filter1)
+         console.addFilter(filter2)
+         */
+        
+        /*
+         // Silence File with Exclusion:
+         console.addFilter(Filters.Path.excludes("Horse", required: true)
+         */
+        
+        log.addDestination(console)
+        
+        
+        // 2-------------------------------------------------------------
+        // MARK: - log to default swiftybeaver.log file
+        let file = FileDestination()
+        /*
+         // Log Certain Message to an own Destination
+         file.logFileURL = URL(string: "file:///tmp/myNetworkLogs.log")
+         file.addFilter(Filters.Message.contains("HTTP", caseSensitive: true, required: true))
+         */
+        log.addDestination(file)
+        
+        
+        // 3-------------------------------------------------------------
+        // MARK: -
+        let platform = SBPlatformDestination(appID: "Z5RkJe", appSecret: "UDxfbvnmxyin4kydENQprhw5tths0bvo", encryptionKey: "t9ugl6wkcvp9w2yRvma0ykpfqy94TjzI")
+        
+        log.addDestination(platform)
+    }
+    
+    // MARK: - Create Socket Connection
+    /*
+     this function will open a soccket connection to the server
+    */
+    public func createSocket() {
         var request = URLRequest(url: URL(string: socketAddress)!)
         request.timeoutInterval = 5
         socket = WebSocket(request: request)
@@ -107,12 +203,7 @@ public class Async {
         socket?.connect()
     }
     
-    var t = RepeatingTimer(timeInterval: 0)
-    
-    var checkIfSocketHasOpennedTimeoutIdTimer:  RepeatingTimer?
-    var socketReconnectRetryIntervalTimer:      RepeatingTimer?
-    var socketReconnectCheckTimer:              RepeatingTimer?
-    
+    // MARK: - Instantiate Timer
     func startTimers() {
         checkIfSocketHasOpennedTimeoutIdTimer = RepeatingTimer(timeInterval: 65)
         checkIfSocketHasOpennedTimeoutIdTimer?.eventHandler = {
@@ -123,7 +214,6 @@ public class Async {
     }
     
     
-    var registerServerTimeoutIdTimer: RepeatingTimer?
     
 }
 
@@ -132,11 +222,16 @@ public class Async {
 //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 
-// methods on socket connection
+// MARK: - Methods on socket connection
 extension Async {
     
-    // MARK: - when socket is connected, this func will trigger
+    // MARK: - Socket Oppend
+    /*
+    when socket is connected, this function will trigger
+    */
     func handleOnOppendSocket() {
+        log.verbose("Handle On Oppend Socket", context: "Async")
+        
         DispatchQueue.global().async {
             self.checkIfSocketHasOpennedTimeoutIdTimer?.suspend()
             self.socketReconnectRetryIntervalTimer?.suspend()
@@ -150,10 +245,16 @@ extension Async {
     }
     
     
-    // MARK: - when socket is closed, this func will trigger
+    // MARK: - Socket Closed
+    /*
+    when socket is closed, this function will trigger
+    this function will reset some variables such as: 'isSocketOpen', 'isDeviceRegister', 'socketState', but keep 'oldPeerId'
+    then sends 'asyncStateChanged' delegate
+    after that will try to connect to socket again (if 'reconnectOnClose' has set 'true' by the client)
+    */
     func handleOnClosedSocket() {
-        print("\n ON Async")
-        print(".. \t handleOnClossedSocket \t")
+        log.verbose("Handle On Closed Socket", context: "Async")
+        
         isSocketOpen = false
         isDeviceRegister = false
         oldPeerId = peerId
@@ -163,6 +264,7 @@ extension Async {
         delegate?.asyncStateChanged(socketState: socketState.rawValue, timeUntilReconnect: 0, deviceRegister: isDeviceRegister, serverRegister: isServerRegister, peerId: peerId)
         delegate?.asyncDisconnect()
         
+        // here, we try to connect to the socket on specific period of time
         if (reconnectOnClose) {
             socketState = socketStateType.CLOSED
             delegate?.asyncStateChanged(socketState: socketState.rawValue, timeUntilReconnect: Int(retryStep), deviceRegister: isDeviceRegister, serverRegister: isServerRegister, peerId: peerId)
@@ -173,8 +275,8 @@ extension Async {
                     self.retryStep = self.retryStep * 2
                 }
                 DispatchQueue.main.async {
-                    print("\n ON Async")
-                    print(".. \t try to connect to the socket on the main threat\n")
+                    log.verbose("try to connect to the socket on the main threat", context: "Async")
+                    
                     self.socket?.connect()
                     self.t.suspend()
                 }
@@ -189,7 +291,19 @@ extension Async {
         
     }
     
-    // MARK: - when message recieves from socket, this func will trigger
+    // MARK: - Message Recieved
+    /*
+     when a message recieves from the socket connection, this function will trigger
+     base on the type of the message, we do sth
+     types:
+     0: PING
+     1: SERVER_REGISTER
+     2: DEVICE_REGISTER
+     3: MESSAGE
+     4: MESSAGE_ACK_NEEDED
+     5: ACK
+     6: ERROR_MESSAGE
+    */
     func handleOnRecieveMessage(messageRecieved: String) {
         
         lastReceivedMessageTime = Date()
@@ -197,19 +311,6 @@ extension Async {
         if let dataFromMsgString = messageRecieved.data(using: .utf8, allowLossyConversion: false) {
             do {
                 let msg = try JSON(data: dataFromMsgString)
-                //                print("\(msg)")
-                //                let msgId = msg["id"].intValue
-                //                let msgSenderMessageId = msg["senderMessageId"].intValue
-                //                let msgSenderName = msg["senderName"].stringValue
-                //                let msgSenderId = msg["senderId"].intValue
-                //                let msgType = msg["type"].intValue
-                //                let msgCont = msg["content"].stringValue
-                //                var msgTrackerId: Int = 0
-                //                if let tId = msg["trackerId"].int {
-                //                    msgTrackerId = tId
-                //                }
-                //
-                //                let msgContent: JSON = ["id": msgId,"senderMessageId": msgSenderMessageId,"senderName": msgSenderName,"senderId": msgSenderId,"type": msgType,"content": msgCont,"trackerId": msgTrackerId]
                 
                 switch msg["type"].intValue {
                 case asyncMessageType.PING.rawValue:
@@ -231,15 +332,17 @@ extension Async {
                     return
                 }
             } catch {
-                //                print("MyLog: error to convert income message String to JSON")
+                log.error("can not convert incoming String Message to JSON", context: "Async")
             }
-        } else { print(".. \t error to get message from server") }
+        } else {
+            log.error("the message comming from server, is not on the correct format!!", context: "Async")
+        }
         
-        // set timer to check if need to close the socket!
+        // set timer to check if needed to close the socket!
         handleIfNeedsToCloseTheSocket()
     }
     
-    
+    // Close Socket connection if needed
     func handleIfNeedsToCloseTheSocket() {
         self.lastReceivedMessageTimeoutId?.suspend()
         DispatchQueue.global().async {
@@ -260,7 +363,10 @@ extension Async {
         }
     }
     
-    
+    // MARK: - Sends Ping Message
+    /*
+     this is the function that sends Ping Message to the server
+     */
     func handlePingMessage(message: JSON) {
         if (!isDeviceRegister) {
             if (message["id"].int != nil) {
@@ -272,7 +378,12 @@ extension Async {
         
     }
     
-    
+    // MARK: - Register Device
+    /*
+     device registered message comes from server, and in its content, it has 'peerId' of the user
+     we set 'isDeviceRegister' to 'true', and set 'peerId'
+     and also send 'asyncStateChanged' to delegate
+    */
     func handleDeviceRegisterMessage(message: JSON) {
         guard message != [] else { return }
         if (!isDeviceRegister) {
@@ -288,13 +399,18 @@ extension Async {
             sendDataFromQueueToSocekt()
             delegate?.asyncReady()
         } else {
-            print("\n ON Async")
-            print(".. \t Device Registered \n")
+            log.info("Device has Registered successfully", context: "Async")
+            
             registerServer()
         }
     }
     
-    
+    // MARK: - Register Server
+    /*
+     Server registered message comes from server
+     we set 'isServerRegister' to 'true', and set 'socketState' to 'OPEN' state
+     and then send 'asyncStateChanged' to delegate, and of course 'asyncReady'
+     */
     func handleServerRegisterMessage(message: JSON) {
         guard message != [] else { return }
         if let senderName = message["senderName"].string {
@@ -303,8 +419,9 @@ extension Async {
                 // reset and stop registerServerTimeoutId
                 socketState = socketStateType.OPEN
                 delegate?.asyncStateChanged(socketState: socketState.rawValue, timeUntilReconnect: 0, deviceRegister: isDeviceRegister, serverRegister: isServerRegister, peerId: peerId)
-                print("\n ON Async")
-                print(".. \t Server Registered\n")
+                
+                log.info("Server has Registered successfully", context: "Async")
+                
                 delegate?.asyncReady()
                 sendDataFromQueueToSocekt()
             }
@@ -314,14 +431,20 @@ extension Async {
         
     }
     
-    
+    // MARK: - Send ACK
+    /*
+     try to send ACk to server for the message that comes from server and it need ACK for this message
+     */
     func handleSendACK(messageContent: JSON) {
-        guard messageContent != [] else { print("..Message Content is empty") ;return }
+        guard messageContent != [] else {
+            log.warning("Message Content is empty", context: "Async")
+            return
+        }
         let msgId = messageContent["id"].int ?? -1
         let content: JSON = ["messageId": msgId]
         let msgIdStr = "\(content)"
-        print("\n ON Async")
-        print(".. Ack mesage content (to send) with id \n \(msgIdStr)\n")
+        log.info("try to send Ack message with id: \(msgIdStr)", context: "Async")
+        
         pushSendData(type: asyncMessageType.ACK.rawValue, content: msgIdStr)
     }
     
@@ -338,10 +461,15 @@ extension Async {
 // methods to help with socket
 extension Async {
     
-    // have peerId and device is not tegistered yet, so register Device
+    
+    // MARK: - make Device Register Message
+    /*
+     this is the function that will make message to Register Device
+     here, we have PeerId, and the next step is to Register Device
+     */
     func registerDevice() {
-        print("\n ON Async")
-        print(".. \t registering Device \n")
+        log.info("make Device Register Message", context: "Async")
+        
         var content: JSON = []
         if (peerId == 0) {
             content = ["appId": appId, "deviceId": deviceId, "renew": true]
@@ -352,10 +480,15 @@ extension Async {
         pushSendData(type: asyncMessageType.DEVICE_REGISTER.rawValue, content: contentStr)
     }
     
-    // have peerId, device is registered, server is not, so register Server
+    // MARK: - make Server Register Message
+    /*
+     this is the function that will make message to Register Server
+     here, we have PeerId, and the Device Registered befor,
+     and the next step is to Register Server
+    */
     func registerServer() {
-        print("\n ON Async")
-        print(".. \t registering Server \n")
+        log.info("make Server Register Message", context: "Async")
+        
         let content: JSON = ["name": serverName]
         let contentStr = "\(content)"
         pushSendData(type: asyncMessageType.SERVER_REGISTER.rawValue, content: contentStr)
@@ -368,9 +501,11 @@ extension Async {
         registerServerTimeoutIdTimer?.resume()
     }
     
-    
-    // data comes to be preapare to send
-    // this will decide to send right away it or put in on Queue to send later
+    // MARK: - prepare data to Send Message
+    /*
+     data comes here to be preapare to send
+     this functin will decide to send it right away or put in on a Queue to send it later (based on the state of the socket connection)
+    */
     public func pushSendData(type: Int, content: String) {
         if (socketState == socketStateType.OPEN) {
             sendData(type: type, content: content)
@@ -379,8 +514,12 @@ extension Async {
         }
     }
     
-    
-    // this method will send data through socket
+    // MARK: - Send Message logically
+    /*
+     this method will send data through socket connection logically.
+     first of all, set a timer to keep the socket connection alive;
+     then if the socket connection state was "OPEN", send the data
+     */
     func sendData(type: Int, content: String?) {
         self.lastSentMessageTimeoutIdTimer?.suspend()
         DispatchQueue.global().async {
@@ -411,29 +550,35 @@ extension Async {
             let messageStr: String = "\(message)"
             delegate?.asyncSendMessage(params: message)
             
+            // these 4 lines are to remove some characters (like: space, \n , \t) exept tho ones that are in the message text context
             let compressedStr = String(messageStr.filter { !" \n\t\r".contains($0) })
             let strWithReturn = compressedStr.replacingOccurrences(of: "Ⓝ", with: "\n")
             let strWithSpace = strWithReturn.replacingOccurrences(of: "Ⓢ", with: " ")
             let strWithTab = strWithSpace.replacingOccurrences(of: "Ⓣ", with: "\t")
             
-            print("\n ON Async")
-            print("..this message sends through socket: \n \(strWithTab) \t\n")
+            log.info("this message sends through socket: \n \(strWithTab)", context: "Async")
             
             socket?.write(string: strWithTab)
         }
     }
     
-    
-    // this method will save data (that have to send) on a Queue, to send it later
+    // MARK: - Hold Messages (that have to be send) on a queue
+    /*
+     this method will hold messages to send them later.
+     (this will contain messges on a queue)
+     */
     func sendDataToQueue(type: Int, content: String) {
-        print("\n ON Async")
-        print("..send data to queue \n")
+        log.info("send data to queue", context: "Async")
+        
         let obj = ["type": type, "content": content] as [String : Any]
         pushSendDataArr.append(obj)
     }
     
-    
-    // send data from queue to socket
+    // MARK: - send data from queue to Send function
+    /*
+     this method will get the messages from queue and pass them to SendData function to send them
+     after that, it will remove that message the queue
+     */
     func sendDataFromQueueToSocekt() {
         for (i, item) in pushSendDataArr.enumerated().reversed() {
             if socketState == socketStateType.OPEN {
@@ -445,13 +590,18 @@ extension Async {
         }
     }
     
-    
+    // MARK: - Check socket connection if it's Closed or not
+    /*
+     this method will check the socket connection if it's Open or not,
+     and then send the socket status to delegate
+     */
     func checkIfSocketIsCloseOrNot() {
         DispatchQueue.main.async {
             if (!self.isSocketOpen) {
                 let err: [String : Any] = ["errorCode": 4001, "errorMessage": "Can not open Socket!"]
-                print("\n ON Async")
-                print("..MyLog: Error: \(err). location: 'checkIfSocketIsCloseOrNot' func\n")
+                
+                log.error("\(err)", context: "Async")
+                
                 self.delegate?.asyncError(errorCode: 4001, errorMessage: "Can not open Socket!", errorEvent: nil)
             } else {
                 self.delegate?.asyncStateChanged(socketState: self.socketState.rawValue, timeUntilReconnect: 0, deviceRegister: self.isDeviceRegister, serverRegister: self.isServerRegister, peerId: self.peerId)
@@ -459,14 +609,20 @@ extension Async {
         }
     }
     
-    
+    // MARK: - Connect to Server
+    /*
+     this method will try to connect to the server, by oppening the socket connection
+     */
     func connecntToSocket() {
         DispatchQueue.main.async {
             self.socket?.connect()
         }
     }
     
-    
+    // MARK: - Retry Server Registeration
+    /*
+     this method will try to do the 'Server Register' functionality
+     */
     @objc func retryToRegisterServer() {
         DispatchQueue.main.async {
             if (!self.isServerRegister) {
@@ -487,37 +643,58 @@ extension Async {
 // Public methods:
 extension Async {
     
-    // this will return Async State
+    // MARK: - Get Async Status
+    /*
+     this method will return Async State (the value inside 'asyncState' property)
+     */
     public func asyncGetAsyncState() -> String {
         return asyncState
     }
     
-    // this will return peerId
+    // MARK: - Get PeerId
+    /*
+     this method will return peerId (the value inside 'peerId' property)
+     */
     public func asyncGetPeerId() -> Int {
         return peerId
     }
     
-    // this will return ServerName
+    // MARK: - Get ServerName
+    /*
+     this method will return ServerName (the value inside 'ServerName' property)
+     */
     public func asyncGetServerName() -> String {
         return serverName
     }
     
-    // this will set new name to ServerName
+    // MARK: - Set ServerName
+    /*
+     this method will set a new name to ServerName
+     */
     public func asyncSetServerName(_ newServerName: String) {
         serverName = newServerName
     }
     
-    // this will set new DeviceId
+    // MARK: - Set DeviceId
+    /*
+     this method will set new DeviceId
+     */
     public func asyncSetDeviceId (_ newDeviceId: String) {
         deviceId = newDeviceId
     }
     
-    // this will prepare data to send ping through
+    // MARK: - Send Async Ping
+    /*
+     this method will send ping message throught Async
+     */
     public func asyncSendPing() {
         sendData(type: 0, content: nil)
     }
     
-    // this method will get content and prepare data to send
+    // MARK: - Send Async Message
+    /*
+     this method will get content and prepare the data inside that to send
+     */
     public func asyncSend(type: Int, content: String, receivers: [Int], priority: Int, ttl: Int) {
         lastMessageId += 1
         let messageId = lastMessageId
@@ -527,7 +704,10 @@ extension Async {
         pushSendData(type: type, content: msgContentStr)
     }
     
-    // disconnect from socket
+    // MARK: - Disconnect from socket
+    /*
+     this method will disconnect Async from socket
+     */
     public func asyncClose() {
         isDeviceRegister = false
         isServerRegister = false
@@ -536,7 +716,10 @@ extension Async {
         socket?.disconnect()
     }
     
-    // log out with this account and close socket
+    // MARK: - Log Out
+    /*
+     this method will log out the user with this account and then will close the socket
+     */
     public func asyncLogOut() {
         oldPeerId = peerId
         peerId = 0
@@ -551,7 +734,10 @@ extension Async {
         asyncClose()
     }
     
-    // try to connect to socket again with my last peerId
+    // MARK: - Reconnect socket
+    /*
+     this method will try to connect to socket again with my last peerId
+     */
     public func asyncReconnectSocket() {
         oldPeerId = peerId
         isDeviceRegister = false
