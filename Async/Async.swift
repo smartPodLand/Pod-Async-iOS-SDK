@@ -80,18 +80,18 @@ public class Async {
     private var socketState         = socketStateType.CONNECTING
     private var asyncState          = ""
     
-//    private var registerServerTimeoutId: Int        = 0
-//    private var registerDeviceTimeoutId: Int        = 0
+    //    private var registerServerTimeoutId: Int        = 0
+    //    private var registerDeviceTimeoutId: Int        = 0
     private var checkIfSocketHasOpennedTimeoutId:   Int = 0
     private var socketReconnectRetryInterval:       Int = 0
     private var socketReconnectCheck:               Int = 0
     
     private var lastMessageId           = 0
     private var retryStep:      Double  = 1
-//    var asyncReadyTimeoutId
+    //    var asyncReadyTimeoutId
     private var pushSendDataArr         = [[String: Any]]()
     
-//    var waitForSocketToConnectTimeoutId: Int
+    //    var waitForSocketToConnectTimeoutId: Int
     var wsConnectionWaitTime:           Int = 5
     var connectionCheckTimeout:         Int = 10
     var lastReceivedMessageTime:        Date?
@@ -114,7 +114,7 @@ public class Async {
     // MARK: - Create Socket Connection
     /*
      this function will open a soccket connection to the server
-    */
+     */
     public func createSocket() {
         var request = URLRequest(url: URL(string: socketAddress)!)
         request.timeoutInterval = 5
@@ -148,8 +148,8 @@ extension Async {
     
     // MARK: - Socket Oppend
     /*
-    when socket is connected, this function will trigger
-    */
+     when socket is connected, this function will trigger
+     */
     func handleOnOppendSocket() {
         log.verbose("Handle On Oppend Socket", context: "Async")
         
@@ -168,11 +168,11 @@ extension Async {
     
     // MARK: - Socket Closed
     /*
-    when socket is closed, this function will trigger
-    this function will reset some variables such as: 'isSocketOpen', 'isDeviceRegister', 'socketState', but keep 'oldPeerId'
-    then sends 'asyncStateChanged' delegate
-    after that will try to connect to socket again (if 'reconnectOnClose' has set 'true' by the client)
-    */
+     when socket is closed, this function will trigger
+     this function will reset some variables such as: 'isSocketOpen', 'isDeviceRegister', 'socketState', but keep 'oldPeerId'
+     then sends 'asyncStateChanged' delegate
+     after that will try to connect to socket again (if 'reconnectOnClose' has set 'true' by the client)
+     */
     func handleOnClosedSocket() {
         log.verbose("Handle On Closed Socket", context: "Async")
         
@@ -224,7 +224,7 @@ extension Async {
      4: MESSAGE_ACK_NEEDED
      5: ACK
      6: ERROR_MESSAGE
-    */
+     */
     func handleOnRecieveMessage(messageRecieved: String) {
         
         lastReceivedMessageTime = Date()
@@ -238,17 +238,23 @@ extension Async {
                     handlePingMessage(message: msg)
                 case asyncMessageType.SERVER_REGISTER.rawValue:
                     handleServerRegisterMessage(message: msg)
+                    
                 case asyncMessageType.DEVICE_REGISTER.rawValue:
                     handleDeviceRegisterMessage(message: msg)
+                    
                 case asyncMessageType.MESSAGE.rawValue:
                     delegate?.asyncReceiveMessage(params: msg)
+                    
                 case asyncMessageType.MESSAGE_ACK_NEEDED.rawValue, asyncMessageType.MESSAGE_SENDER_ACK_NEEDED.rawValue:
                     handleSendACK(messageContent: msg)
                     delegate?.asyncReceiveMessage(params: msg)
+                    
                 case asyncMessageType.ACK.rawValue:
                     delegate?.asyncReceiveMessage(params: msg)
+                    
                 case asyncMessageType.ERROR_MESSAGE.rawValue:
                     delegate?.asyncError(errorCode: 4002, errorMessage: "Async Error!", errorEvent: msg)
+                    
                 default:
                     return
                 }
@@ -304,7 +310,7 @@ extension Async {
      device registered message comes from server, and in its content, it has 'peerId' of the user
      we set 'isDeviceRegister' to 'true', and set 'peerId'
      and also send 'asyncStateChanged' to delegate
-    */
+     */
     func handleDeviceRegisterMessage(message: JSON) {
         guard message != [] else { return }
         if (!isDeviceRegister) {
@@ -406,7 +412,7 @@ extension Async {
      this is the function that will make message to Register Server
      here, we have PeerId, and the Device Registered befor,
      and the next step is to Register Server
-    */
+     */
     func registerServer() {
         log.info("make Server Register Message", context: "Async")
         
@@ -426,7 +432,7 @@ extension Async {
     /*
      data comes here to be preapare to send
      this functin will decide to send it right away or put in on a Queue to send it later (based on the state of the socket connection)
-    */
+     */
     public func pushSendData(type: Int, content: String) {
         if (socketState == socketStateType.OPEN) {
             sendData(type: type, content: content)
