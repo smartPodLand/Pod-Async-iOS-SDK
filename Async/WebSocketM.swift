@@ -8,6 +8,7 @@
 
 import Foundation
 import Starscream
+import SwiftyBeaver
 
 // implement websocket delegate methods
 extension Async: WebSocketDelegate {
@@ -18,8 +19,13 @@ extension Async: WebSocketDelegate {
     
     public func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
         handleOnClosedSocket()
-        print("\n ON Async")
-        print(".. \t socket closed error = \(error ?? "??" as! Error)\n")
+        
+        if let myError = error {
+            log.warning("socket closed error = \(myError)", context: "Async")
+        } else {
+            log.warning("socket closed error", context: "Async")
+        }
+        
     }
     
     public func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {

@@ -238,17 +238,23 @@ extension Async {
                     handlePingMessage(message: msg)
                 case asyncMessageType.SERVER_REGISTER.rawValue:
                     handleServerRegisterMessage(message: msg)
+                    
                 case asyncMessageType.DEVICE_REGISTER.rawValue:
                     handleDeviceRegisterMessage(message: msg)
+                    
                 case asyncMessageType.MESSAGE.rawValue:
                     delegate?.asyncReceiveMessage(params: msg)
+                    
                 case asyncMessageType.MESSAGE_ACK_NEEDED.rawValue, asyncMessageType.MESSAGE_SENDER_ACK_NEEDED.rawValue:
                     handleSendACK(messageContent: msg)
                     delegate?.asyncReceiveMessage(params: msg)
+                    
                 case asyncMessageType.ACK.rawValue:
                     delegate?.asyncReceiveMessage(params: msg)
+                    
                 case asyncMessageType.ERROR_MESSAGE.rawValue:
                     delegate?.asyncError(errorCode: 4002, errorMessage: "Async Error!", errorEvent: msg)
+                    
                 default:
                     return
                 }
