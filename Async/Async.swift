@@ -80,18 +80,18 @@ public class Async {
     private var socketState         = socketStateType.CONNECTING
     private var asyncState          = ""
     
-//    private var registerServerTimeoutId: Int        = 0
-//    private var registerDeviceTimeoutId: Int        = 0
+    //    private var registerServerTimeoutId: Int        = 0
+    //    private var registerDeviceTimeoutId: Int        = 0
     private var checkIfSocketHasOpennedTimeoutId:   Int = 0
     private var socketReconnectRetryInterval:       Int = 0
     private var socketReconnectCheck:               Int = 0
     
     private var lastMessageId           = 0
     private var retryStep:      Double  = 1
-//    var asyncReadyTimeoutId
+    //    var asyncReadyTimeoutId
     private var pushSendDataArr         = [[String: Any]]()
     
-//    var waitForSocketToConnectTimeoutId: Int
+    //    var waitForSocketToConnectTimeoutId: Int
     var wsConnectionWaitTime:           Int = 5
     var connectionCheckTimeout:         Int = 10
     var lastReceivedMessageTime:        Date?
@@ -114,7 +114,7 @@ public class Async {
     // MARK: - Create Socket Connection
     /*
      this function will open a soccket connection to the server
-    */
+     */
     public func createSocket() {
         var request = URLRequest(url: URL(string: socketAddress)!)
         request.timeoutInterval = 5
@@ -148,8 +148,8 @@ extension Async {
     
     // MARK: - Socket Oppend
     /*
-    when socket is connected, this function will trigger
-    */
+     when socket is connected, this function will trigger
+     */
     func handleOnOppendSocket() {
         log.verbose("Handle On Oppend Socket", context: "Async")
         
@@ -168,11 +168,11 @@ extension Async {
     
     // MARK: - Socket Closed
     /*
-    when socket is closed, this function will trigger
-    this function will reset some variables such as: 'isSocketOpen', 'isDeviceRegister', 'socketState', but keep 'oldPeerId'
-    then sends 'asyncStateChanged' delegate
-    after that will try to connect to socket again (if 'reconnectOnClose' has set 'true' by the client)
-    */
+     when socket is closed, this function will trigger
+     this function will reset some variables such as: 'isSocketOpen', 'isDeviceRegister', 'socketState', but keep 'oldPeerId'
+     then sends 'asyncStateChanged' delegate
+     after that will try to connect to socket again (if 'reconnectOnClose' has set 'true' by the client)
+     */
     func handleOnClosedSocket() {
         log.verbose("Handle On Closed Socket", context: "Async")
         
@@ -224,7 +224,7 @@ extension Async {
      4: MESSAGE_ACK_NEEDED
      5: ACK
      6: ERROR_MESSAGE
-    */
+     */
     func handleOnRecieveMessage(messageRecieved: String) {
         
         lastReceivedMessageTime = Date()
@@ -310,7 +310,7 @@ extension Async {
      device registered message comes from server, and in its content, it has 'peerId' of the user
      we set 'isDeviceRegister' to 'true', and set 'peerId'
      and also send 'asyncStateChanged' to delegate
-    */
+     */
     func handleDeviceRegisterMessage(message: JSON) {
         guard message != [] else { return }
         if (!isDeviceRegister) {
@@ -326,7 +326,7 @@ extension Async {
             sendDataFromQueueToSocekt()
             delegate?.asyncReady()
         } else {
-            log.info("Device has Registered successfully", context: "Async")
+            log.verbose("Device has Registered successfully", context: "Async")
             
             registerServer()
         }
@@ -347,7 +347,7 @@ extension Async {
                 socketState = socketStateType.OPEN
                 delegate?.asyncStateChanged(socketState: socketState.rawValue, timeUntilReconnect: 0, deviceRegister: isDeviceRegister, serverRegister: isServerRegister, peerId: peerId)
                 
-                log.info("Server has Registered successfully", context: "Async")
+                log.verbose("Server has Registered successfully", context: "Async")
                 
                 delegate?.asyncReady()
                 sendDataFromQueueToSocekt()
@@ -370,7 +370,7 @@ extension Async {
         let msgId = messageContent["id"].int ?? -1
         let content: JSON = ["messageId": msgId]
         let msgIdStr = "\(content)"
-        log.info("try to send Ack message with id: \(msgIdStr)", context: "Async")
+        log.verbose("try to send Ack message with id: \(msgIdStr)", context: "Async")
         
         pushSendData(type: asyncMessageType.ACK.rawValue, content: msgIdStr)
     }
@@ -395,7 +395,7 @@ extension Async {
      here, we have PeerId, and the next step is to Register Device
      */
     func registerDevice() {
-        log.info("make Device Register Message", context: "Async")
+        log.verbose("make Device Register Message", context: "Async")
         
         var content: JSON = []
         if (peerId == 0) {
@@ -412,9 +412,9 @@ extension Async {
      this is the function that will make message to Register Server
      here, we have PeerId, and the Device Registered befor,
      and the next step is to Register Server
-    */
+     */
     func registerServer() {
-        log.info("make Server Register Message", context: "Async")
+        log.verbose("make Server Register Message", context: "Async")
         
         let content: JSON = ["name": serverName]
         let contentStr = "\(content)"
@@ -432,7 +432,7 @@ extension Async {
     /*
      data comes here to be preapare to send
      this functin will decide to send it right away or put in on a Queue to send it later (based on the state of the socket connection)
-    */
+     */
     public func pushSendData(type: Int, content: String) {
         if (socketState == socketStateType.OPEN) {
             sendData(type: type, content: content)
@@ -483,7 +483,7 @@ extension Async {
             let strWithSpace = strWithReturn.replacingOccurrences(of: "Ⓢ", with: " ")
             let strWithTab = strWithSpace.replacingOccurrences(of: "Ⓣ", with: "\t")
             
-            log.info("this message sends through socket: \n \(strWithTab)", context: "Async")
+            log.verbose("this message sends through socket: \n \(strWithTab)", context: "Async")
             
             socket?.write(string: strWithTab)
         }
@@ -495,7 +495,7 @@ extension Async {
      (this will contain messges on a queue)
      */
     func sendDataToQueue(type: Int, content: String) {
-        log.info("send data to queue", context: "Async")
+        log.verbose("send data to queue", context: "Async")
         
         let obj = ["type": type, "content": content] as [String : Any]
         pushSendDataArr.append(obj)
