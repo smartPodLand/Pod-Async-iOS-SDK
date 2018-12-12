@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.source_files = "Async/**/*.{h,m, swift}"
   s.frameworks = "Foundation"
 
-  s.dependency "Starscream"
+  s.dependency 'Starscream', '~> 3.0.2'
   s.dependency "SwiftyJSON"
   s.dependency "SwiftyBeaver"
 
