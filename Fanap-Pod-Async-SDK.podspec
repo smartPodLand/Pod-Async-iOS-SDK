@@ -13,6 +13,12 @@ Pod::Spec.new do |s|
   s.source_files = "Async/**/*.{h,m, swift}"
   s.frameworks = "Foundation" , "CommonCrypto"
 
+  s.libraries = 'z'
+  s.pod_target_xcconfig = {
+  'SWIFT_VERSION' => '4.1',
+  'SWIFT_INCLUDE_PATHS' => '$(PODS_ROOT)/Starscream/zlib'
+  }
+
   s.dependency 'Starscream', '~> 3.0.5'
   s.dependency "SwiftyJSON"
   s.dependency "SwiftyBeaver"
