@@ -11,9 +11,9 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "8.0"
   s.source       = { :git => "https://github.com/smartPodLand/Pod-Async-iOS-SDK.git", :tag => s.version }
   s.source_files = "Async/**/*.{h,m, swift}"
-  s.frameworks = "Foundation"
+  s.frameworks = "Foundation" , "CommonCrypto"
 
-  s.dependency 'Starscream', '~> 3.0.2'
+  s.dependency 'Starscream', '~> 3.0.5'
   s.dependency "SwiftyJSON"
   s.dependency "SwiftyBeaver"
 
