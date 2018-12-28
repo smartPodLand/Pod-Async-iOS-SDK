@@ -8,18 +8,10 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/smartPodLand/Pod-Async-iOS-SDK"
   s.license      = "MIT"
   s.author       = { "Mahyar" => "mahyar.zhiani@icloud.com" }
-  s.platform     = :ios, "8.0"
+  s.platform     = :ios, "11.2"
   s.source       = { :git => "https://github.com/smartPodLand/Pod-Async-iOS-SDK.git", :tag => s.version }
-  s.source_files = "Async/**/*.{h,m, swift}"
-  s.frameworks = "Foundation" , "CommonCrypto"
-
-  s.libraries = 'z'
-  s.pod_target_xcconfig = {
-  'SWIFT_VERSION' => '4.1',
-  'SWIFT_INCLUDE_PATHS' => '$(PODS_ROOT)/Starscream/zlib'
-  }
-
-  s.dependency 'Starscream', '~> 3.0.5'
+  s.framework  = "Foundation"
+  s.dependency "Starscream"
   s.dependency "SwiftyJSON"
   s.dependency "SwiftyBeaver"
 
