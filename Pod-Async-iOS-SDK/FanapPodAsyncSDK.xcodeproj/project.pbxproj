@@ -15,7 +15,7 @@
 		3EBBEE0A2174CDC000F5CDC7 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBEE092174CDC000F5CDC7 /* Enums.swift */; };
 		3EBBEE162174CE7F00F5CDC7 /* WebSocketM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBEE152174CE7F00F5CDC7 /* WebSocketM.swift */; };
 		3ED1311421A5401D00149997 /* LogWithSwiftyBeaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED1311321A5401D00149997 /* LogWithSwiftyBeaver.swift */; };
-		3ED59C17211098400026FFF5 /* Async.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED59C0D211098400026FFF5 /* Async.framework */; };
+		3ED59C17211098400026FFF5 /* FanapPodAsyncSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED59C0D211098400026FFF5 /* FanapPodAsyncSDK.framework */; };
 		3ED59C1C211098400026FFF5 /* AsyncTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED59C1B211098400026FFF5 /* AsyncTests.swift */; };
 		3ED59C1E211098400026FFF5 /* Async.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ED59C10211098400026FFF5 /* Async.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ED59C282110988E0026FFF5 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED59C272110988E0026FFF5 /* Async.swift */; };
@@ -138,10 +138,10 @@
 		3EBBEE092174CDC000F5CDC7 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		3EBBEE152174CE7F00F5CDC7 /* WebSocketM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketM.swift; sourceTree = "<group>"; };
 		3ED1311321A5401D00149997 /* LogWithSwiftyBeaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogWithSwiftyBeaver.swift; sourceTree = "<group>"; };
-		3ED59C0D211098400026FFF5 /* Async.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Async.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3ED59C0D211098400026FFF5 /* FanapPodAsyncSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FanapPodAsyncSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ED59C10211098400026FFF5 /* Async.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Async.h; sourceTree = "<group>"; };
 		3ED59C11211098400026FFF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3ED59C16211098400026FFF5 /* AsyncTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AsyncTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3ED59C16211098400026FFF5 /* FanapPodAsyncSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FanapPodAsyncSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ED59C1B211098400026FFF5 /* AsyncTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncTests.swift; sourceTree = "<group>"; };
 		3ED59C1D211098400026FFF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3ED59C272110988E0026FFF5 /* Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
@@ -162,7 +162,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3ED59C17211098400026FFF5 /* Async.framework in Frameworks */,
+				3ED59C17211098400026FFF5 /* FanapPodAsyncSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,8 +237,8 @@
 		3ED59C0E211098400026FFF5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3ED59C0D211098400026FFF5 /* Async.framework */,
-				3ED59C16211098400026FFF5 /* AsyncTests.xctest */,
+				3ED59C0D211098400026FFF5 /* FanapPodAsyncSDK.framework */,
+				3ED59C16211098400026FFF5 /* FanapPodAsyncSDKTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -279,9 +279,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		3ED59C0C211098400026FFF5 /* Async */ = {
+		3ED59C0C211098400026FFF5 /* FanapPodAsyncSDK */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3ED59C21211098400026FFF5 /* Build configuration list for PBXNativeTarget "Async" */;
+			buildConfigurationList = 3ED59C21211098400026FFF5 /* Build configuration list for PBXNativeTarget "FanapPodAsyncSDK" */;
 			buildPhases = (
 				3ED59C08211098400026FFF5 /* Sources */,
 				3ED59C09211098400026FFF5 /* Frameworks */,
@@ -293,14 +293,14 @@
 			);
 			dependencies = (
 			);
-			name = Async;
+			name = FanapPodAsyncSDK;
 			productName = Async;
-			productReference = 3ED59C0D211098400026FFF5 /* Async.framework */;
+			productReference = 3ED59C0D211098400026FFF5 /* FanapPodAsyncSDK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		3ED59C15211098400026FFF5 /* AsyncTests */ = {
+		3ED59C15211098400026FFF5 /* FanapPodAsyncSDKTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3ED59C24211098400026FFF5 /* Build configuration list for PBXNativeTarget "AsyncTests" */;
+			buildConfigurationList = 3ED59C24211098400026FFF5 /* Build configuration list for PBXNativeTarget "FanapPodAsyncSDKTests" */;
 			buildPhases = (
 				3ED59C12211098400026FFF5 /* Sources */,
 				3ED59C13211098400026FFF5 /* Frameworks */,
@@ -311,9 +311,9 @@
 			dependencies = (
 				3ED59C19211098400026FFF5 /* PBXTargetDependency */,
 			);
-			name = AsyncTests;
+			name = FanapPodAsyncSDKTests;
 			productName = AsyncTests;
-			productReference = 3ED59C16211098400026FFF5 /* AsyncTests.xctest */;
+			productReference = 3ED59C16211098400026FFF5 /* FanapPodAsyncSDKTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -335,7 +335,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3ED59C07211098400026FFF5 /* Build configuration list for PBXProject "Async" */;
+			buildConfigurationList = 3ED59C07211098400026FFF5 /* Build configuration list for PBXProject "FanapPodAsyncSDK" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -361,8 +361,8 @@
 			);
 			projectRoot = "";
 			targets = (
-				3ED59C0C211098400026FFF5 /* Async */,
-				3ED59C15211098400026FFF5 /* AsyncTests */,
+				3ED59C0C211098400026FFF5 /* FanapPodAsyncSDK */,
+				3ED59C15211098400026FFF5 /* FanapPodAsyncSDKTests */,
 			);
 		};
 /* End PBXProject section */
@@ -528,7 +528,7 @@
 /* Begin PBXTargetDependency section */
 		3ED59C19211098400026FFF5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3ED59C0C211098400026FFF5 /* Async */;
+			target = 3ED59C0C211098400026FFF5 /* FanapPodAsyncSDK */;
 			targetProxy = 3ED59C18211098400026FFF5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -672,7 +672,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.fanapSoft.Async;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fanapSoft.FanapPodAsyncSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -699,7 +699,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.fanapSoft.Async;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fanapSoft.FanapPodAsyncSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -748,7 +748,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3ED59C07211098400026FFF5 /* Build configuration list for PBXProject "Async" */ = {
+		3ED59C07211098400026FFF5 /* Build configuration list for PBXProject "FanapPodAsyncSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3ED59C1F211098400026FFF5 /* Debug */,
@@ -757,7 +757,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3ED59C21211098400026FFF5 /* Build configuration list for PBXNativeTarget "Async" */ = {
+		3ED59C21211098400026FFF5 /* Build configuration list for PBXNativeTarget "FanapPodAsyncSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3ED59C22211098400026FFF5 /* Debug */,
@@ -766,7 +766,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3ED59C24211098400026FFF5 /* Build configuration list for PBXNativeTarget "AsyncTests" */ = {
+		3ED59C24211098400026FFF5 /* Build configuration list for PBXNativeTarget "FanapPodAsyncSDKTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3ED59C25211098400026FFF5 /* Debug */,

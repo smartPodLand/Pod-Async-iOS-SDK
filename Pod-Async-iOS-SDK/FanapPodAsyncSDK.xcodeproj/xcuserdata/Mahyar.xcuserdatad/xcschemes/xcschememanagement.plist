@@ -12,6 +12,11 @@
 		<key>Async.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
+		<key>FanapPodAsyncSDK.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
 			<integer>15</integer>
 		</dict>
 	</dict>
