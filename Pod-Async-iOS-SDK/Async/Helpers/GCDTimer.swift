@@ -10,15 +10,15 @@ import Foundation
 
 // this is the timer class, that will handle the complexity of timer functionality
 // it will uses many times on Async and also on Chat maybe
-class RepeatingTimer {
+open class RepeatingTimer {
     
-    let timeInterval: TimeInterval
+    public let timeInterval: TimeInterval
     
-    init(timeInterval: TimeInterval) {
+    public init(timeInterval: TimeInterval) {
         self.timeInterval = timeInterval
     }
     
-    private lazy var timer: DispatchSourceTimer = {
+    public lazy var timer: DispatchSourceTimer = {
         let t = DispatchSource.makeTimerSource()
         t.schedule(deadline: .now() + self.timeInterval, repeating: self.timeInterval)
         t.setEventHandler(handler: { [weak self] in
@@ -27,14 +27,14 @@ class RepeatingTimer {
         return t
     }()
     
-    var eventHandler: (() -> Void)?
+    public var eventHandler: (() -> Void)?
     
-    private enum State {
+    public enum State {
         case suspended
         case resumed
     }
     
-    private var state: State = .suspended
+    public var state: State = .suspended
     
     deinit {
         timer.setEventHandler {}
@@ -43,7 +43,7 @@ class RepeatingTimer {
         eventHandler = nil
     }
     
-    func resume() {
+    public func resume() {
         if state == .resumed {
             return
         }
@@ -51,7 +51,7 @@ class RepeatingTimer {
         timer.resume()
     }
     
-    func suspend() {
+    public func suspend() {
         if state == .suspended {
             return
         }

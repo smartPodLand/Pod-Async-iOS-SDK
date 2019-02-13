@@ -226,7 +226,7 @@ extension Async {
      6: ERROR_MESSAGE
      */
     func handleOnRecieveMessage(messageRecieved: String) {
-        
+        log.verbose("This Message Recieves from socket: \n\(messageRecieved)", context: "Async - RecieveFromSocket")
         lastReceivedMessageTime = Date()
         
         if let dataFromMsgString = messageRecieved.data(using: .utf8, allowLossyConversion: false) {
