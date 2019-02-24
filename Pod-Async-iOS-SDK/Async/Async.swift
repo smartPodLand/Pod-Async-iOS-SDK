@@ -30,14 +30,14 @@ public class Async {
     private var connectionRetryInterval:Int         // how many times to try to connet the socket
     
     // MARK: - Async initializer
-    public init(socketAddress: String,
-                serverName: String,
-                deviceId: String,
-                appId: String?,
-                peerId: Int?,
-                messageTtl: Int?,
+    public init(socketAddress:      String,
+                serverName:         String,
+                deviceId:           String,
+                appId:              String?,
+                peerId:             Int?,
+                messageTtl:         Int?,
                 connectionRetryInterval: Int?,
-                reconnectOnClose: Bool?) {
+                reconnectOnClose:   Bool?) {
         
         self.socketAddress = socketAddress
         self.serverName = serverName
@@ -72,13 +72,13 @@ public class Async {
     }
     
     
-    private var oldPeerId: Int?
+    private var oldPeerId:          Int?
     private var isSocketOpen        = false
     private var isDeviceRegister    = false
     private var isServerRegister    = false
     
     private var socketState         = socketStateType.CONNECTING
-    private var asyncState          = ""
+//    private var asyncState          = ""
     
     //    private var registerServerTimeoutId: Int        = 0
     //    private var registerDeviceTimeoutId: Int        = 0
@@ -574,8 +574,9 @@ extension Async {
     /*
      this method will return Async State (the value inside 'asyncState' property)
      */
-    public func asyncGetAsyncState() -> String {
-        return asyncState
+    public func asyncGetAsyncState() -> JSON {
+        let state: JSON = ["socketState": socketState.rawValue, "idDeviceRegistered": isDeviceRegister, "isServerRegistered": isServerRegister, "peerId": peerId]
+        return state
     }
     
     // MARK: - Get PeerId
