@@ -4,3 +4,7 @@ Pod-Async-iOS-SDK/SwiftyJSON-3.1.1/
 .DS_Store/
 xcuserdata/
 *.xcuserdata
+Pod-Async-iOS-SDK/.DS_Store
+.DS_Store
+Pod-Async-iOS-SDK/FanapPodAsyncSDK.xcodeproj/project.xcworkspace/xcuserdata/Mahyar.xcuserdatad/UserInterfaceState.xcuserstate
+Pod-Async-iOS-SDK/.DS_Store
