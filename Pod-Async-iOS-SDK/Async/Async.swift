@@ -28,7 +28,7 @@ public class Async {
     private var messageTtl:             Int         //
     private var reconnectOnClose:       Bool        // should i try to reconnet the socket whenever socket is close?
     private var connectionRetryInterval:Int         // how many times to try to connet the socket
-    
+     
     // MARK: - Async initializer
     public init(socketAddress:      String,
                 serverName:         String,
