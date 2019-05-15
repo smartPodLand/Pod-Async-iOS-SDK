@@ -483,7 +483,7 @@ extension Async {
             let strWithSpace = strWithReturn.replacingOccurrences(of: "Ⓢ", with: " ")
             let strWithTab = strWithSpace.replacingOccurrences(of: "Ⓣ", with: "\t")
             
-            log.verbose("this message sends through socket: \n \(strWithTab)", context: "Async")
+            log.debug("this message sends through socket: \n \(strWithTab)", context: "Async")
             
             socket?.write(string: strWithTab)
         }
