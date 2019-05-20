@@ -8,7 +8,7 @@
 
 import Foundation
 import Starscream
-import SwiftyBeaver
+//import SwiftyBeaver
 
 // implement websocket delegate methods
 extension Async: WebSocketDelegate {
@@ -21,9 +21,9 @@ extension Async: WebSocketDelegate {
         handleOnClosedSocket()
         
         if let myError = error {
-            log.warning("socket closed error = \(myError)", context: "Async")
+//            log.warning("socket closed error = \(myError)", context: "Async")
         } else {
-            log.warning("socket closed error", context: "Async")
+//            log.warning("socket closed error", context: "Async")
         }
         
     }
