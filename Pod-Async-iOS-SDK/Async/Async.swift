@@ -526,7 +526,7 @@ extension Async {
         DispatchQueue.main.async {
             if (!self.isSocketOpen) {
                 let err: [String : Any] = ["errorCode": 4001, "errorMessage": "Can not open Socket!"]
-                
+                print("\(err)")
 //                log.error("\(err)", context: "Async")
                 
                 self.delegate?.asyncError(errorCode: 4001, errorMessage: "Can not open Socket!", errorEvent: nil)
