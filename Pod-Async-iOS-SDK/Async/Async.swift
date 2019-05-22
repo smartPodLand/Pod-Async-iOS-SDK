@@ -9,9 +9,9 @@
 import Foundation
 import Starscream
 import SwiftyJSON
-//import SwiftyBeaver
+import SwiftyBeaver
 
-//public let log = LogWithSwiftyBeaver().log
+public let log = LogWithSwiftyBeaver().log
 
 // this is the Async class that will handles Asynchronous messaging
 public class Async {
@@ -151,7 +151,7 @@ extension Async {
      when socket is connected, this function will trigger
      */
     func handleOnOppendSocket() {
-//        log.verbose("Handle On Oppend Socket", context: "Async")
+        log.verbose("Handle On Oppend Socket", context: "Async")
         
         DispatchQueue.global().async {
             self.checkIfSocketHasOpennedTimeoutIdTimer?.suspend()
@@ -174,7 +174,7 @@ extension Async {
      after that will try to connect to socket again (if 'reconnectOnClose' has set 'true' by the client)
      */
     func handleOnClosedSocket() {
-//        log.verbose("Handle On Closed Socket", context: "Async")
+        log.verbose("Handle On Closed Socket", context: "Async")
         
         isSocketOpen = false
         isDeviceRegister = false
@@ -196,7 +196,7 @@ extension Async {
                     self.retryStep = self.retryStep * 2
                 }
                 DispatchQueue.main.async {
-//                    log.verbose("try to connect to the socket on the main threat", context: "Async")
+                    log.verbose("try to connect to the socket on the main threat", context: "Async")
                     
                     self.socket?.connect()
                     self.t.suspend()
@@ -226,7 +226,7 @@ extension Async {
      6: ERROR_MESSAGE
      */
     func handleOnRecieveMessage(messageRecieved: String) {
-//        log.verbose("This Message Recieves from socket: \n\(messageRecieved)", context: "Async - RecieveFromSocket")
+        log.verbose("This Message Recieves from socket: \n\(messageRecieved)", context: "Async - RecieveFromSocket")
         lastReceivedMessageTime = Date()
         
         if let dataFromMsgString = messageRecieved.data(using: .utf8, allowLossyConversion: false) {
@@ -259,10 +259,10 @@ extension Async {
                     return
                 }
             } catch {
-//                log.error("can not convert incoming String Message to JSON", context: "Async")
+                log.error("can not convert incoming String Message to JSON", context: "Async")
             }
         } else {
-//            log.error("the message comming from server, is not on the correct format!!", context: "Async")
+            log.error("the message comming from server, is not on the correct format!!", context: "Async")
         }
         
         // set timer to check if needed to close the socket!
@@ -326,8 +326,7 @@ extension Async {
             sendDataFromQueueToSocekt()
             delegate?.asyncReady()
         } else {
-//            log.verbose("Device has Registered successfully", context: "Async")
-            
+            log.verbose("Device has Registered successfully", context: "Async")
             registerServer()
         }
     }
@@ -347,7 +346,7 @@ extension Async {
                 socketState = socketStateType.OPEN
                 delegate?.asyncStateChanged(socketState: socketState.rawValue, timeUntilReconnect: 0, deviceRegister: isDeviceRegister, serverRegister: isServerRegister, peerId: peerId)
                 
-//                log.verbose("Server has Registered successfully", context: "Async")
+                log.verbose("Server has Registered successfully", context: "Async")
                 
                 delegate?.asyncReady()
                 sendDataFromQueueToSocekt()
@@ -364,13 +363,13 @@ extension Async {
      */
     func handleSendACK(messageContent: JSON) {
         guard messageContent != [] else {
-//            log.warning("Message Content is empty", context: "Async")
+            log.warning("Message Content is empty", context: "Async")
             return
         }
         let msgId = messageContent["id"].int ?? -1
         let content: JSON = ["messageId": msgId]
         let msgIdStr = "\(content)"
-//        log.verbose("try to send Ack message with id: \(msgIdStr)", context: "Async")
+        log.verbose("try to send Ack message with id: \(msgIdStr)", context: "Async")
         
         pushSendData(type: asyncMessageType.ACK.rawValue, content: msgIdStr)
     }
@@ -395,7 +394,7 @@ extension Async {
      here, we have PeerId, and the next step is to Register Device
      */
     func registerDevice() {
-//        log.verbose("make Device Register Message", context: "Async")
+        log.verbose("make Device Register Message", context: "Async")
         
         var content: JSON = []
         if (peerId == 0) {
@@ -414,7 +413,7 @@ extension Async {
      and the next step is to Register Server
      */
     func registerServer() {
-//        log.verbose("make Server Register Message", context: "Async")
+        log.verbose("make Server Register Message", context: "Async")
         
         let content: JSON = ["name": serverName]
         let contentStr = "\(content)"
@@ -483,7 +482,7 @@ extension Async {
             let strWithSpace = strWithReturn.replacingOccurrences(of: "Ⓢ", with: " ")
             let strWithTab = strWithSpace.replacingOccurrences(of: "Ⓣ", with: "\t")
             
-//            log.debug("this message sends through socket: \n \(strWithTab)", context: "Async")
+            log.debug("this message sends through socket: \n \(strWithTab)", context: "Async")
             
             socket?.write(string: strWithTab)
         }
@@ -495,7 +494,7 @@ extension Async {
      (this will contain messges on a queue)
      */
     func sendDataToQueue(type: Int, content: String) {
-//        log.verbose("send data to queue", context: "Async")
+        log.verbose("send data to queue", context: "Async")
         
         let obj = ["type": type, "content": content] as [String : Any]
         pushSendDataArr.append(obj)
@@ -527,7 +526,7 @@ extension Async {
             if (!self.isSocketOpen) {
                 let err: [String : Any] = ["errorCode": 4001, "errorMessage": "Can not open Socket!"]
                 print("\(err)")
-//                log.error("\(err)", context: "Async")
+                log.error("\(err)", context: "Async")
                 
                 self.delegate?.asyncError(errorCode: 4001, errorMessage: "Can not open Socket!", errorEvent: nil)
             } else {
