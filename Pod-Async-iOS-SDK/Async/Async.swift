@@ -11,6 +11,7 @@ import Starscream
 import SwiftyJSON
 import SwiftyBeaver
 
+
 public let log = LogWithSwiftyBeaver().log
 
 // this is the Async class that will handles Asynchronous messaging

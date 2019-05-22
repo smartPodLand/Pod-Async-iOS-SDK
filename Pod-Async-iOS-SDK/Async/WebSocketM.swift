@@ -10,6 +10,7 @@ import Foundation
 import Starscream
 import SwiftyBeaver
 
+
 // implement websocket delegate methods
 extension Async: WebSocketDelegate {
     

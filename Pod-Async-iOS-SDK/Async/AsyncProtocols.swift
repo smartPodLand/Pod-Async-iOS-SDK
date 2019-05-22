@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 
+
 // AsyncDelegate that the Chat Module have to implement to use them
 public protocol AsyncDelegates: class {
     func asyncSendMessage(params: Any)
