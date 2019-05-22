@@ -327,7 +327,6 @@ extension Async {
             delegate?.asyncReady()
         } else {
             log.verbose("Device has Registered successfully", context: "Async")
-            
             registerServer()
         }
     }
@@ -483,7 +482,7 @@ extension Async {
             let strWithSpace = strWithReturn.replacingOccurrences(of: "Ⓢ", with: " ")
             let strWithTab = strWithSpace.replacingOccurrences(of: "Ⓣ", with: "\t")
             
-            log.verbose("this message sends through socket: \n \(strWithTab)", context: "Async")
+            log.debug("this message sends through socket: \n \(strWithTab)", context: "Async")
             
             socket?.write(string: strWithTab)
         }
@@ -526,7 +525,7 @@ extension Async {
         DispatchQueue.main.async {
             if (!self.isSocketOpen) {
                 let err: [String : Any] = ["errorCode": 4001, "errorMessage": "Can not open Socket!"]
-                
+                print("\(err)")
                 log.error("\(err)", context: "Async")
                 
                 self.delegate?.asyncError(errorCode: 4001, errorMessage: "Can not open Socket!", errorEvent: nil)
