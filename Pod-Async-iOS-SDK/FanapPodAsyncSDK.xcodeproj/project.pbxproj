@@ -19,6 +19,15 @@
 		3ED59C1C211098400026FFF5 /* AsyncTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED59C1B211098400026FFF5 /* AsyncTests.swift */; };
 		3ED59C1E211098400026FFF5 /* Async.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ED59C10211098400026FFF5 /* Async.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ED59C282110988E0026FFF5 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED59C272110988E0026FFF5 /* Async.swift */; };
+		3EE6394E22B0C49900C4E8BF /* MakeCustomTextToSend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE6394D22B0C49900C4E8BF /* MakeCustomTextToSend.swift */; };
+		3EE6396022B0CA4600C4E8BF /* AsyncPublicMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE6395F22B0CA4600C4E8BF /* AsyncPublicMethods.swift */; };
+		3EE6396122B0CA4600C4E8BF /* AsyncPublicMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE6395F22B0CA4600C4E8BF /* AsyncPublicMethods.swift */; };
+		3EE6396322B0CAF200C4E8BF /* PrivateMethodsToSendMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE6396222B0CAF200C4E8BF /* PrivateMethodsToSendMessage.swift */; };
+		3EE6396422B0CAF200C4E8BF /* PrivateMethodsToSendMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE6396222B0CAF200C4E8BF /* PrivateMethodsToSendMessage.swift */; };
+		3EE6396822B0CE7800C4E8BF /* PrivateMethodsToCheckConnectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE6396722B0CE7800C4E8BF /* PrivateMethodsToCheckConnectionState.swift */; };
+		3EE6396922B0CE7800C4E8BF /* PrivateMethodsToCheckConnectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE6396722B0CE7800C4E8BF /* PrivateMethodsToCheckConnectionState.swift */; };
+		3EE6396B22B0CF7200C4E8BF /* MethodsOnSocketConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE6396A22B0CF7200C4E8BF /* MethodsOnSocketConnection.swift */; };
+		3EE6396C22B0CF7200C4E8BF /* MethodsOnSocketConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE6396A22B0CF7200C4E8BF /* MethodsOnSocketConnection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +154,11 @@
 		3ED59C1B211098400026FFF5 /* AsyncTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncTests.swift; sourceTree = "<group>"; };
 		3ED59C1D211098400026FFF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3ED59C272110988E0026FFF5 /* Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
+		3EE6394D22B0C49900C4E8BF /* MakeCustomTextToSend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeCustomTextToSend.swift; sourceTree = "<group>"; };
+		3EE6395F22B0CA4600C4E8BF /* AsyncPublicMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncPublicMethods.swift; sourceTree = "<group>"; };
+		3EE6396222B0CAF200C4E8BF /* PrivateMethodsToSendMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateMethodsToSendMessage.swift; sourceTree = "<group>"; };
+		3EE6396722B0CE7800C4E8BF /* PrivateMethodsToCheckConnectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateMethodsToCheckConnectionState.swift; sourceTree = "<group>"; };
+		3EE6396A22B0CF7200C4E8BF /* MethodsOnSocketConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodsOnSocketConnection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +216,7 @@
 		3EBBEE172174CFA000F5CDC7 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				3EE6394D22B0C49900C4E8BF /* MakeCustomTextToSend.swift */,
 				3EBBEE092174CDC000F5CDC7 /* Enums.swift */,
 				3E4BC2F8211AE8D3008E025F /* GCDTimer.swift */,
 				3ED1311321A5401D00149997 /* LogWithSwiftyBeaver.swift */,
@@ -248,9 +263,7 @@
 			children = (
 				3ED59C10211098400026FFF5 /* Async.h */,
 				3ED59C11211098400026FFF5 /* Info.plist */,
-				3ED59C272110988E0026FFF5 /* Async.swift */,
-				3EBBEE152174CE7F00F5CDC7 /* WebSocketM.swift */,
-				3E060FF521206395000BD35A /* AsyncProtocols.swift */,
+				3EE6396D22B0D34C00C4E8BF /* Main */,
 				3EBBEE172174CFA000F5CDC7 /* Helpers */,
 			);
 			path = Async;
@@ -263,6 +276,36 @@
 				3ED59C1D211098400026FFF5 /* Info.plist */,
 			);
 			path = AsyncTests;
+			sourceTree = "<group>";
+		};
+		3EE6396522B0CDB000C4E8BF /* AsyncPrivateMethods */ = {
+			isa = PBXGroup;
+			children = (
+				3EE6396A22B0CF7200C4E8BF /* MethodsOnSocketConnection.swift */,
+				3EE6396222B0CAF200C4E8BF /* PrivateMethodsToSendMessage.swift */,
+				3EE6396722B0CE7800C4E8BF /* PrivateMethodsToCheckConnectionState.swift */,
+			);
+			path = AsyncPrivateMethods;
+			sourceTree = "<group>";
+		};
+		3EE6396622B0CDCE00C4E8BF /* AsyncPublicMethods */ = {
+			isa = PBXGroup;
+			children = (
+				3EE6395F22B0CA4600C4E8BF /* AsyncPublicMethods.swift */,
+			);
+			path = AsyncPublicMethods;
+			sourceTree = "<group>";
+		};
+		3EE6396D22B0D34C00C4E8BF /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				3ED59C272110988E0026FFF5 /* Async.swift */,
+				3EBBEE152174CE7F00F5CDC7 /* WebSocketM.swift */,
+				3E060FF521206395000BD35A /* AsyncProtocols.swift */,
+				3EE6396522B0CDB000C4E8BF /* AsyncPrivateMethods */,
+				3EE6396622B0CDCE00C4E8BF /* AsyncPublicMethods */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -506,9 +549,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EE6396B22B0CF7200C4E8BF /* MethodsOnSocketConnection.swift in Sources */,
 				3EBBEE162174CE7F00F5CDC7 /* WebSocketM.swift in Sources */,
 				3ED1311421A5401D00149997 /* LogWithSwiftyBeaver.swift in Sources */,
 				3E4BC2F9211AE8D3008E025F /* GCDTimer.swift in Sources */,
+				3EE6394E22B0C49900C4E8BF /* MakeCustomTextToSend.swift in Sources */,
+				3EE6396322B0CAF200C4E8BF /* PrivateMethodsToSendMessage.swift in Sources */,
+				3EE6396822B0CE7800C4E8BF /* PrivateMethodsToCheckConnectionState.swift in Sources */,
+				3EE6396022B0CA4600C4E8BF /* AsyncPublicMethods.swift in Sources */,
 				3EBBEE0A2174CDC000F5CDC7 /* Enums.swift in Sources */,
 				3ED59C282110988E0026FFF5 /* Async.swift in Sources */,
 				3E060FF621206395000BD35A /* AsyncProtocols.swift in Sources */,
@@ -519,6 +567,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EE6396122B0CA4600C4E8BF /* AsyncPublicMethods.swift in Sources */,
+				3EE6396922B0CE7800C4E8BF /* PrivateMethodsToCheckConnectionState.swift in Sources */,
+				3EE6396C22B0CF7200C4E8BF /* MethodsOnSocketConnection.swift in Sources */,
+				3EE6396422B0CAF200C4E8BF /* PrivateMethodsToSendMessage.swift in Sources */,
 				3ED59C1C211098400026FFF5 /* AsyncTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
