@@ -9,12 +9,9 @@
 /* Begin PBXBuildFile section */
 		3E060FF621206395000BD35A /* AsyncProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E060FF521206395000BD35A /* AsyncProtocols.swift */; };
 		3E4BC2F9211AE8D3008E025F /* GCDTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4BC2F8211AE8D3008E025F /* GCDTimer.swift */; };
-		3E8942782259C58A008F2C52 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E8942752259C57B008F2C52 /* Starscream.framework */; };
-		3E89427A2259C590008F2C52 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E8942502259C56E008F2C52 /* SwiftyJSON.framework */; };
 		3EBBEE0A2174CDC000F5CDC7 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBEE092174CDC000F5CDC7 /* Enums.swift */; };
 		3EBBEE162174CE7F00F5CDC7 /* WebSocketM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBEE152174CE7F00F5CDC7 /* WebSocketM.swift */; };
 		3ED1311421A5401D00149997 /* LogWithSwiftyBeaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED1311321A5401D00149997 /* LogWithSwiftyBeaver.swift */; };
-		3ED2254722953DE100E51B42 /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED2253622953D4200E51B42 /* SwiftyBeaver.framework */; };
 		3ED59C17211098400026FFF5 /* FanapPodAsyncSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED59C0D211098400026FFF5 /* FanapPodAsyncSDK.framework */; };
 		3ED59C1C211098400026FFF5 /* AsyncTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED59C1B211098400026FFF5 /* AsyncTests.swift */; };
 		3ED59C1E211098400026FFF5 /* Async.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ED59C10211098400026FFF5 /* Async.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -28,107 +25,12 @@
 		3EE6396922B0CE7800C4E8BF /* PrivateMethodsToCheckConnectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE6396722B0CE7800C4E8BF /* PrivateMethodsToCheckConnectionState.swift */; };
 		3EE6396B22B0CF7200C4E8BF /* MethodsOnSocketConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE6396A22B0CF7200C4E8BF /* MethodsOnSocketConnection.swift */; };
 		3EE6396C22B0CF7200C4E8BF /* MethodsOnSocketConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE6396A22B0CF7200C4E8BF /* MethodsOnSocketConnection.swift */; };
+		3EFDB492236C6F4000623461 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EFDB464236C6F2200623461 /* Starscream.framework */; };
+		3EFDB493236C6F4500623461 /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EFDB470236C6F2C00623461 /* SwiftyBeaver.framework */; };
+		3EFDB494236C6F4900623461 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EFDB485236C6F3300623461 /* SwiftyJSON.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3E89424F2259C56E008F2C52 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E8942442259C56E008F2C52 /* SwiftyJSON.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 2E4FEFDB19575BE100351305;
-			remoteInfo = "SwiftyJSON iOS";
-		};
-		3E8942512259C56E008F2C52 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E8942442259C56E008F2C52 /* SwiftyJSON.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 2E4FEFE619575BE100351305;
-			remoteInfo = "SwiftyJSON iOS Tests";
-		};
-		3E8942532259C56E008F2C52 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E8942442259C56E008F2C52 /* SwiftyJSON.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 9C7DFC5B1A9102BD005AA3F7;
-			remoteInfo = "SwiftyJSON macOS";
-		};
-		3E8942552259C56E008F2C52 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E8942442259C56E008F2C52 /* SwiftyJSON.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 9C7DFC651A9102BD005AA3F7;
-			remoteInfo = "SwiftyJSON macOS Tests";
-		};
-		3E8942572259C56E008F2C52 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E8942442259C56E008F2C52 /* SwiftyJSON.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E4D7CCE81B9465A700EE7221;
-			remoteInfo = "SwiftyJSON watchOS";
-		};
-		3E8942592259C56E008F2C52 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E8942442259C56E008F2C52 /* SwiftyJSON.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 7236B4F61BAC14150020529B;
-			remoteInfo = "SwiftyJSON tvOS";
-		};
-		3E89425B2259C56E008F2C52 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E8942442259C56E008F2C52 /* SwiftyJSON.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A8580F741BCF5C5B00DA927B;
-			remoteInfo = "SwiftyJSON tvOS Tests";
-		};
-		3E8942742259C57B008F2C52 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E89426F2259C57B008F2C52 /* Starscream.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 33CCF0921F5DDC030099B092;
-			remoteInfo = Starscream;
-		};
-		3E8942762259C57B008F2C52 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E89426F2259C57B008F2C52 /* Starscream.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 335FA2021F5DF71D00F6D2EC;
-			remoteInfo = "Starscream Tests";
-		};
-		3ED2253522953D4200E51B42 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3ED2252B22953D4200E51B42 /* SwiftyBeaver.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 9EDCE3E41C09D211002FA4A7;
-			remoteInfo = "SwiftyBeaver (iOS)";
-		};
-		3ED2253722953D4200E51B42 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3ED2252B22953D4200E51B42 /* SwiftyBeaver.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 9EDCE3EE1C09D211002FA4A7;
-			remoteInfo = SwiftyBeaverTests;
-		};
-		3ED2253922953D4200E51B42 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3ED2252B22953D4200E51B42 /* SwiftyBeaver.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = ACE597841C1882DF0031451F;
-			remoteInfo = "SwiftyBeaver (watchOS)";
-		};
-		3ED2253B22953D4200E51B42 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3ED2252B22953D4200E51B42 /* SwiftyBeaver.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = ACE597951C18830D0031451F;
-			remoteInfo = "SwiftyBeaver (tvOS)";
-		};
-		3ED2253D22953D4200E51B42 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3ED2252B22953D4200E51B42 /* SwiftyBeaver.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = ACE597A61C18832E0031451F;
-			remoteInfo = "SwiftyBeaver (macOS)";
-		};
 		3ED59C18211098400026FFF5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3ED59C04211098400026FFF5 /* Project object */;
@@ -136,17 +38,112 @@
 			remoteGlobalIDString = 3ED59C0C211098400026FFF5;
 			remoteInfo = Async;
 		};
+		3EFDB463236C6F2200623461 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EFDB45E236C6F2200623461 /* Starscream.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 33CCF0921F5DDC030099B092;
+			remoteInfo = Starscream;
+		};
+		3EFDB465236C6F2200623461 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EFDB45E236C6F2200623461 /* Starscream.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 335FA2021F5DF71D00F6D2EC;
+			remoteInfo = "Starscream Tests";
+		};
+		3EFDB46F236C6F2C00623461 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EFDB467236C6F2C00623461 /* SwiftyBeaver.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9EDCE3E41C09D211002FA4A7;
+			remoteInfo = "SwiftyBeaver (iOS)";
+		};
+		3EFDB471236C6F2C00623461 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EFDB467236C6F2C00623461 /* SwiftyBeaver.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9EDCE3EE1C09D211002FA4A7;
+			remoteInfo = SwiftyBeaverTests;
+		};
+		3EFDB473236C6F2C00623461 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EFDB467236C6F2C00623461 /* SwiftyBeaver.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = ACE597841C1882DF0031451F;
+			remoteInfo = "SwiftyBeaver (watchOS)";
+		};
+		3EFDB475236C6F2C00623461 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EFDB467236C6F2C00623461 /* SwiftyBeaver.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = ACE597951C18830D0031451F;
+			remoteInfo = "SwiftyBeaver (tvOS)";
+		};
+		3EFDB477236C6F2C00623461 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EFDB467236C6F2C00623461 /* SwiftyBeaver.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = ACE597A61C18832E0031451F;
+			remoteInfo = "SwiftyBeaver (macOS)";
+		};
+		3EFDB484236C6F3300623461 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EFDB479236C6F3300623461 /* SwiftyJSON.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2E4FEFDB19575BE100351305;
+			remoteInfo = "SwiftyJSON iOS";
+		};
+		3EFDB486236C6F3300623461 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EFDB479236C6F3300623461 /* SwiftyJSON.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2E4FEFE619575BE100351305;
+			remoteInfo = "SwiftyJSON iOS Tests";
+		};
+		3EFDB488236C6F3300623461 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EFDB479236C6F3300623461 /* SwiftyJSON.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9C7DFC5B1A9102BD005AA3F7;
+			remoteInfo = "SwiftyJSON macOS";
+		};
+		3EFDB48A236C6F3300623461 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EFDB479236C6F3300623461 /* SwiftyJSON.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9C7DFC651A9102BD005AA3F7;
+			remoteInfo = "SwiftyJSON macOS Tests";
+		};
+		3EFDB48C236C6F3300623461 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EFDB479236C6F3300623461 /* SwiftyJSON.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E4D7CCE81B9465A700EE7221;
+			remoteInfo = "SwiftyJSON watchOS";
+		};
+		3EFDB48E236C6F3300623461 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EFDB479236C6F3300623461 /* SwiftyJSON.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7236B4F61BAC14150020529B;
+			remoteInfo = "SwiftyJSON tvOS";
+		};
+		3EFDB490236C6F3300623461 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EFDB479236C6F3300623461 /* SwiftyJSON.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A8580F741BCF5C5B00DA927B;
+			remoteInfo = "SwiftyJSON tvOS Tests";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		3E060FF521206395000BD35A /* AsyncProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncProtocols.swift; sourceTree = "<group>"; };
 		3E4BC2F8211AE8D3008E025F /* GCDTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDTimer.swift; sourceTree = "<group>"; };
-		3E8942442259C56E008F2C52 /* SwiftyJSON.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftyJSON.xcodeproj; path = "../../Usefull Libraries/SwiftyJSON-master/SwiftyJSON.xcodeproj"; sourceTree = "<group>"; };
-		3E89426F2259C57B008F2C52 /* Starscream.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Starscream.xcodeproj; path = "../../Usefull Libraries/Starscream-master/Starscream.xcodeproj"; sourceTree = "<group>"; };
 		3EBBEE092174CDC000F5CDC7 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		3EBBEE152174CE7F00F5CDC7 /* WebSocketM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketM.swift; sourceTree = "<group>"; };
 		3ED1311321A5401D00149997 /* LogWithSwiftyBeaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogWithSwiftyBeaver.swift; sourceTree = "<group>"; };
-		3ED2252B22953D4200E51B42 /* SwiftyBeaver.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftyBeaver.xcodeproj; path = "../../Usefull Libraries/SwiftyBeaver-master/SwiftyBeaver.xcodeproj"; sourceTree = "<group>"; };
 		3ED59C0D211098400026FFF5 /* FanapPodAsyncSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FanapPodAsyncSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ED59C10211098400026FFF5 /* Async.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Async.h; sourceTree = "<group>"; };
 		3ED59C11211098400026FFF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -159,6 +156,9 @@
 		3EE6396222B0CAF200C4E8BF /* PrivateMethodsToSendMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateMethodsToSendMessage.swift; sourceTree = "<group>"; };
 		3EE6396722B0CE7800C4E8BF /* PrivateMethodsToCheckConnectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateMethodsToCheckConnectionState.swift; sourceTree = "<group>"; };
 		3EE6396A22B0CF7200C4E8BF /* MethodsOnSocketConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodsOnSocketConnection.swift; sourceTree = "<group>"; };
+		3EFDB45E236C6F2200623461 /* Starscream.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Starscream.xcodeproj; path = "../../../Usefull Libraries/Starscream-3.0.5/Starscream.xcodeproj"; sourceTree = "<group>"; };
+		3EFDB467236C6F2C00623461 /* SwiftyBeaver.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftyBeaver.xcodeproj; path = "../../../Usefull Libraries/SwiftyBeaver-master/SwiftyBeaver.xcodeproj"; sourceTree = "<group>"; };
+		3EFDB479236C6F3300623461 /* SwiftyJSON.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftyJSON.xcodeproj; path = "../../../Usefull Libraries/SwiftyJSON-master/SwiftyJSON.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,9 +166,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3ED2254722953DE100E51B42 /* SwiftyBeaver.framework in Frameworks */,
-				3E89427A2259C590008F2C52 /* SwiftyJSON.framework in Frameworks */,
-				3E8942782259C58A008F2C52 /* Starscream.framework in Frameworks */,
+				3EFDB494236C6F4900623461 /* SwiftyJSON.framework in Frameworks */,
+				3EFDB493236C6F4500623461 /* SwiftyBeaver.framework in Frameworks */,
+				3EFDB492236C6F4000623461 /* Starscream.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,29 +190,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3E8942452259C56E008F2C52 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3E8942502259C56E008F2C52 /* SwiftyJSON.framework */,
-				3E8942522259C56E008F2C52 /* SwiftyJSON iOS Tests.xctest */,
-				3E8942542259C56E008F2C52 /* SwiftyJSON.framework */,
-				3E8942562259C56E008F2C52 /* SwiftyJSON macOS Tests.xctest */,
-				3E8942582259C56E008F2C52 /* SwiftyJSON.framework */,
-				3E89425A2259C56E008F2C52 /* SwiftyJSON.framework */,
-				3E89425C2259C56E008F2C52 /* SwiftyJSON tvOS Tests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		3E8942702259C57B008F2C52 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3E8942752259C57B008F2C52 /* Starscream.framework */,
-				3E8942772259C57B008F2C52 /* Starscream Tests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		3EBBEE172174CFA000F5CDC7 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,27 +201,15 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		3ED2252C22953D4200E51B42 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3ED2253622953D4200E51B42 /* SwiftyBeaver.framework */,
-				3ED2253822953D4200E51B42 /* SwiftyBeaverTests.xctest */,
-				3ED2253A22953D4200E51B42 /* SwiftyBeaver.framework */,
-				3ED2253C22953D4200E51B42 /* SwiftyBeaver.framework */,
-				3ED2253E22953D4200E51B42 /* SwiftyBeaver.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		3ED59C03211098400026FFF5 = {
 			isa = PBXGroup;
 			children = (
 				3ED59C0F211098400026FFF5 /* Async */,
 				3ED59C1A211098400026FFF5 /* AsyncTests */,
 				3ED59C0E211098400026FFF5 /* Products */,
-				3ED2252B22953D4200E51B42 /* SwiftyBeaver.xcodeproj */,
-				3E89426F2259C57B008F2C52 /* Starscream.xcodeproj */,
-				3E8942442259C56E008F2C52 /* SwiftyJSON.xcodeproj */,
+				3EFDB479236C6F3300623461 /* SwiftyJSON.xcodeproj */,
+				3EFDB467236C6F2C00623461 /* SwiftyBeaver.xcodeproj */,
+				3EFDB45E236C6F2200623461 /* Starscream.xcodeproj */,
 				3E25906821D695EA00CB9D7D /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -306,6 +271,41 @@
 				3EE6396622B0CDCE00C4E8BF /* AsyncPublicMethods */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		3EFDB45F236C6F2200623461 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3EFDB464236C6F2200623461 /* Starscream.framework */,
+				3EFDB466236C6F2200623461 /* Starscream Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3EFDB468236C6F2C00623461 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3EFDB470236C6F2C00623461 /* SwiftyBeaver.framework */,
+				3EFDB472236C6F2C00623461 /* SwiftyBeaverTests.xctest */,
+				3EFDB474236C6F2C00623461 /* SwiftyBeaver.framework */,
+				3EFDB476236C6F2C00623461 /* SwiftyBeaver.framework */,
+				3EFDB478236C6F2C00623461 /* SwiftyBeaver.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3EFDB47A236C6F3300623461 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3EFDB485236C6F3300623461 /* SwiftyJSON.framework */,
+				3EFDB487236C6F3300623461 /* SwiftyJSON iOS Tests.xctest */,
+				3EFDB489236C6F3300623461 /* SwiftyJSON.framework */,
+				3EFDB48B236C6F3300623461 /* SwiftyJSON macOS Tests.xctest */,
+				3EFDB48D236C6F3300623461 /* SwiftyJSON.framework */,
+				3EFDB48F236C6F3300623461 /* SwiftyJSON.framework */,
+				3EFDB491236C6F3300623461 /* SwiftyJSON tvOS Tests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -390,16 +390,16 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 3E8942702259C57B008F2C52 /* Products */;
-					ProjectRef = 3E89426F2259C57B008F2C52 /* Starscream.xcodeproj */;
+					ProductGroup = 3EFDB45F236C6F2200623461 /* Products */;
+					ProjectRef = 3EFDB45E236C6F2200623461 /* Starscream.xcodeproj */;
 				},
 				{
-					ProductGroup = 3ED2252C22953D4200E51B42 /* Products */;
-					ProjectRef = 3ED2252B22953D4200E51B42 /* SwiftyBeaver.xcodeproj */;
+					ProductGroup = 3EFDB468236C6F2C00623461 /* Products */;
+					ProjectRef = 3EFDB467236C6F2C00623461 /* SwiftyBeaver.xcodeproj */;
 				},
 				{
-					ProductGroup = 3E8942452259C56E008F2C52 /* Products */;
-					ProjectRef = 3E8942442259C56E008F2C52 /* SwiftyJSON.xcodeproj */;
+					ProductGroup = 3EFDB47A236C6F3300623461 /* Products */;
+					ProjectRef = 3EFDB479236C6F3300623461 /* SwiftyJSON.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -411,102 +411,102 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		3E8942502259C56E008F2C52 /* SwiftyJSON.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SwiftyJSON.framework;
-			remoteRef = 3E89424F2259C56E008F2C52 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3E8942522259C56E008F2C52 /* SwiftyJSON iOS Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "SwiftyJSON iOS Tests.xctest";
-			remoteRef = 3E8942512259C56E008F2C52 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3E8942542259C56E008F2C52 /* SwiftyJSON.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SwiftyJSON.framework;
-			remoteRef = 3E8942532259C56E008F2C52 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3E8942562259C56E008F2C52 /* SwiftyJSON macOS Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "SwiftyJSON macOS Tests.xctest";
-			remoteRef = 3E8942552259C56E008F2C52 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3E8942582259C56E008F2C52 /* SwiftyJSON.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SwiftyJSON.framework;
-			remoteRef = 3E8942572259C56E008F2C52 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3E89425A2259C56E008F2C52 /* SwiftyJSON.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SwiftyJSON.framework;
-			remoteRef = 3E8942592259C56E008F2C52 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3E89425C2259C56E008F2C52 /* SwiftyJSON tvOS Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "SwiftyJSON tvOS Tests.xctest";
-			remoteRef = 3E89425B2259C56E008F2C52 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3E8942752259C57B008F2C52 /* Starscream.framework */ = {
+		3EFDB464236C6F2200623461 /* Starscream.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Starscream.framework;
-			remoteRef = 3E8942742259C57B008F2C52 /* PBXContainerItemProxy */;
+			remoteRef = 3EFDB463236C6F2200623461 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		3E8942772259C57B008F2C52 /* Starscream Tests.xctest */ = {
+		3EFDB466236C6F2200623461 /* Starscream Tests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "Starscream Tests.xctest";
-			remoteRef = 3E8942762259C57B008F2C52 /* PBXContainerItemProxy */;
+			remoteRef = 3EFDB465236C6F2200623461 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		3ED2253622953D4200E51B42 /* SwiftyBeaver.framework */ = {
+		3EFDB470236C6F2C00623461 /* SwiftyBeaver.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = SwiftyBeaver.framework;
-			remoteRef = 3ED2253522953D4200E51B42 /* PBXContainerItemProxy */;
+			remoteRef = 3EFDB46F236C6F2C00623461 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		3ED2253822953D4200E51B42 /* SwiftyBeaverTests.xctest */ = {
+		3EFDB472236C6F2C00623461 /* SwiftyBeaverTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = SwiftyBeaverTests.xctest;
-			remoteRef = 3ED2253722953D4200E51B42 /* PBXContainerItemProxy */;
+			remoteRef = 3EFDB471236C6F2C00623461 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		3ED2253A22953D4200E51B42 /* SwiftyBeaver.framework */ = {
+		3EFDB474236C6F2C00623461 /* SwiftyBeaver.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = SwiftyBeaver.framework;
-			remoteRef = 3ED2253922953D4200E51B42 /* PBXContainerItemProxy */;
+			remoteRef = 3EFDB473236C6F2C00623461 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		3ED2253C22953D4200E51B42 /* SwiftyBeaver.framework */ = {
+		3EFDB476236C6F2C00623461 /* SwiftyBeaver.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = SwiftyBeaver.framework;
-			remoteRef = 3ED2253B22953D4200E51B42 /* PBXContainerItemProxy */;
+			remoteRef = 3EFDB475236C6F2C00623461 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		3ED2253E22953D4200E51B42 /* SwiftyBeaver.framework */ = {
+		3EFDB478236C6F2C00623461 /* SwiftyBeaver.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = SwiftyBeaver.framework;
-			remoteRef = 3ED2253D22953D4200E51B42 /* PBXContainerItemProxy */;
+			remoteRef = 3EFDB477236C6F2C00623461 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3EFDB485236C6F3300623461 /* SwiftyJSON.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftyJSON.framework;
+			remoteRef = 3EFDB484236C6F3300623461 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3EFDB487236C6F3300623461 /* SwiftyJSON iOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SwiftyJSON iOS Tests.xctest";
+			remoteRef = 3EFDB486236C6F3300623461 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3EFDB489236C6F3300623461 /* SwiftyJSON.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftyJSON.framework;
+			remoteRef = 3EFDB488236C6F3300623461 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3EFDB48B236C6F3300623461 /* SwiftyJSON macOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SwiftyJSON macOS Tests.xctest";
+			remoteRef = 3EFDB48A236C6F3300623461 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3EFDB48D236C6F3300623461 /* SwiftyJSON.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftyJSON.framework;
+			remoteRef = 3EFDB48C236C6F3300623461 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3EFDB48F236C6F3300623461 /* SwiftyJSON.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftyJSON.framework;
+			remoteRef = 3EFDB48E236C6F3300623461 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3EFDB491236C6F3300623461 /* SwiftyJSON tvOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SwiftyJSON tvOS Tests.xctest";
+			remoteRef = 3EFDB490236C6F3300623461 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
