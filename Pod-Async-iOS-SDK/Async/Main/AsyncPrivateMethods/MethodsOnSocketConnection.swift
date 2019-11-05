@@ -29,7 +29,11 @@ extension Async {
         delegate?.asyncConnect(newPeerID: peerId)
         retryStep = 1
         socketState = socketStateType.OPEN
-        delegate?.asyncStateChanged(socketState: socketState.rawValue, timeUntilReconnect: 0, deviceRegister: isDeviceRegister, serverRegister: isServerRegister, peerId: peerId)
+        delegate?.asyncStateChanged(socketState:        socketState.rawValue,
+                                    timeUntilReconnect: 0,
+                                    deviceRegister:     isDeviceRegister,
+                                    serverRegister:     isServerRegister,
+                                    peerId:             peerId)
     }
     
     
@@ -49,13 +53,21 @@ extension Async {
         
         socketState = socketStateType.CLOSED
         
-        delegate?.asyncStateChanged(socketState: socketState.rawValue, timeUntilReconnect: 0, deviceRegister: isDeviceRegister, serverRegister: isServerRegister, peerId: peerId)
+        delegate?.asyncStateChanged(socketState:        socketState.rawValue,
+                                    timeUntilReconnect: 0,
+                                    deviceRegister:     isDeviceRegister,
+                                    serverRegister:     isServerRegister,
+                                    peerId:             peerId)
         delegate?.asyncDisconnect()
         
         // here, we try to connect to the socket on specific period of time
         if (reconnectOnClose) {
             socketState = socketStateType.CLOSED
-            delegate?.asyncStateChanged(socketState: socketState.rawValue, timeUntilReconnect: Int(retryStep), deviceRegister: isDeviceRegister, serverRegister: isServerRegister, peerId: peerId)
+            delegate?.asyncStateChanged(socketState:        socketState.rawValue,
+                                        timeUntilReconnect: Int(retryStep),
+                                        deviceRegister:     isDeviceRegister,
+                                        serverRegister:     isServerRegister,
+                                        peerId:             peerId)
             
             t = RepeatingTimer(timeInterval: retryStep)
             t.eventHandler = {
@@ -73,8 +85,14 @@ extension Async {
             
             
         } else {
-            delegate?.asyncError(errorCode: 4005, errorMessage: "Socket Closed!", errorEvent: nil)
-            delegate?.asyncStateChanged(socketState: socketState.rawValue, timeUntilReconnect: 0, deviceRegister: isDeviceRegister, serverRegister: isServerRegister, peerId: peerId)
+            delegate?.asyncError(errorCode:     4005,
+                                 errorMessage:  "Socket Closed!",
+                                 errorEvent:    nil)
+            delegate?.asyncStateChanged(socketState:        socketState.rawValue,
+                                        timeUntilReconnect: 0,
+                                        deviceRegister:     isDeviceRegister,
+                                        serverRegister:     isServerRegister,
+                                        peerId:             peerId)
         }
         
     }
@@ -120,7 +138,9 @@ extension Async {
                     delegate?.asyncReceiveMessage(params: msg)
                     
                 case asyncMessageType.ERROR_MESSAGE.rawValue:
-                    delegate?.asyncError(errorCode: 4002, errorMessage: "Async Error!", errorEvent: msg)
+                    delegate?.asyncError(errorCode:     4002,
+                                         errorMessage:  "Async Error!",
+                                         errorEvent:    msg)
                     
                 default:
                     return
@@ -169,7 +189,9 @@ extension Async {
             if (message["id"].int != nil) {
                 registerDevice()
             } else {
-                delegate?.asyncError(errorCode: 4003, errorMessage: "Device Id is not present!", errorEvent: nil)
+                delegate?.asyncError(errorCode:     4003,
+                                     errorMessage:  "Device Id is not present!",
+                                     errorEvent:    nil)
             }
         }
         
@@ -191,7 +213,11 @@ extension Async {
         peerId = message["content"].intValue
         socketState = socketStateType.OPEN
         
-        delegate?.asyncStateChanged(socketState: socketState.rawValue, timeUntilReconnect: 0, deviceRegister: isDeviceRegister, serverRegister: isServerRegister, peerId: peerId)
+        delegate?.asyncStateChanged(socketState:        socketState.rawValue,
+                                    timeUntilReconnect: 0,
+                                    deviceRegister:     isDeviceRegister,
+                                    serverRegister:     isServerRegister,
+                                    peerId:             peerId)
         if (isServerRegister == true && peerId == oldPeerId) {
             sendDataFromQueueToSocekt()
             delegate?.asyncReady()
@@ -214,7 +240,11 @@ extension Async {
                 isServerRegister = true
                 // reset and stop registerServerTimeoutId
                 socketState = socketStateType.OPEN
-                delegate?.asyncStateChanged(socketState: socketState.rawValue, timeUntilReconnect: 0, deviceRegister: isDeviceRegister, serverRegister: isServerRegister, peerId: peerId)
+                delegate?.asyncStateChanged(socketState:        socketState.rawValue,
+                                            timeUntilReconnect: 0,
+                                            deviceRegister:     isDeviceRegister,
+                                            serverRegister:     isServerRegister,
+                                            peerId:             peerId)
                 
                 log.verbose("Server has Registered successfully", context: "Async")
                 

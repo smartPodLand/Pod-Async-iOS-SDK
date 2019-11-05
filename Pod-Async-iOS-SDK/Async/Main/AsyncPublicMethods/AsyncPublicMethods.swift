@@ -111,7 +111,11 @@ extension Async {
         isDeviceRegister = false
         isServerRegister = false
         socketState = socketStateType.CLOSED
-        delegate?.asyncStateChanged(socketState: socketState.rawValue, timeUntilReconnect: 0, deviceRegister: isDeviceRegister, serverRegister: isServerRegister, peerId: peerId)
+        delegate?.asyncStateChanged(socketState:        socketState.rawValue,
+                                    timeUntilReconnect: 0,
+                                    deviceRegister:     isDeviceRegister,
+                                    serverRegister:     isServerRegister,
+                                    peerId:             peerId)
         socket?.disconnect()
     }
     
@@ -128,7 +132,11 @@ extension Async {
         pushSendDataArr = []
         registerServerTimeoutIdTimer?.suspend()
         socketState = socketStateType.CLOSED
-        delegate?.asyncStateChanged(socketState: socketState.rawValue, timeUntilReconnect: 0, deviceRegister: isDeviceRegister, serverRegister: isServerRegister, peerId: peerId)
+        delegate?.asyncStateChanged(socketState:        socketState.rawValue,
+                                    timeUntilReconnect: 0,
+                                    deviceRegister:     isDeviceRegister,
+                                    serverRegister:     isServerRegister,
+                                    peerId:             peerId)
         reconnectOnClose = false
         asyncClose()
     }

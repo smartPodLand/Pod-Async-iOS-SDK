@@ -35,9 +35,15 @@ extension Async {
                 print("\(err)")
                 log.error("\(err)", context: "Async")
                 
-                self.delegate?.asyncError(errorCode: 4001, errorMessage: "Can not open Socket!", errorEvent: nil)
+                self.delegate?.asyncError(errorCode:    4001,
+                                          errorMessage: "Can not open Socket!",
+                                          errorEvent:   nil)
             } else {
-                self.delegate?.asyncStateChanged(socketState: self.socketState.rawValue, timeUntilReconnect: 0, deviceRegister: self.isDeviceRegister, serverRegister: self.isServerRegister, peerId: self.peerId)
+                self.delegate?.asyncStateChanged(socketState:           self.socketState.rawValue,
+                                                 timeUntilReconnect:    0,
+                                                 deviceRegister:        self.isDeviceRegister,
+                                                 serverRegister:        self.isServerRegister,
+                                                 peerId:                self.peerId)
             }
         }
     }
