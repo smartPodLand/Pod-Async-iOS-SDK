@@ -64,6 +64,7 @@ extension Async {
      */
     func sendData(type: Int, content: String?) {
         self.lastSentMessageTimeoutIdTimer?.suspend()
+        self.lastSentMessageTimeoutIdTimer = nil
         DispatchQueue.global().async {
             self.lastSentMessageTime = Date()
             self.lastSentMessageTimeoutIdTimer = RepeatingTimer(timeInterval: TimeInterval(self.connectionCheckTimeout))
@@ -75,7 +76,9 @@ extension Async {
                         DispatchQueue.main.async {
                             self.asyncSendPing()
                         }
-                        self.lastSentMessageTimeoutIdTimer?.suspend()
+                        if let _ = self.lastSentMessageTimeoutIdTimer {
+                            self.lastSentMessageTimeoutIdTimer?.suspend()
+                        }
                     }
                 }
             }

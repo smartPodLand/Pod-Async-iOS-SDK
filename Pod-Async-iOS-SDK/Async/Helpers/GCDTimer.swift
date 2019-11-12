@@ -39,8 +39,8 @@ open class RepeatingTimer {
     
     deinit {
         timer.setEventHandler {}
-        timer.cancel()
         resume()
+        timer.cancel()
         guard let _ = eventHandler else { return }
         eventHandler = nil
     }
