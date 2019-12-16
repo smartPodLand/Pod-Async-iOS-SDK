@@ -52,7 +52,8 @@ ________________________________________________________________________________
          // set global minLevel (verbose, info, debug, warning, error)
          console.minLevel = .error
          */
-        console.minLevel = .debug
+        console.minLevel = .error
+//        console.minLevel = .debug
         
         /*
          // set Path Filter to a certain class
