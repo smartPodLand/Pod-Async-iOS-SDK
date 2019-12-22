@@ -52,7 +52,7 @@ ________________________________________________________________________________
          // set global minLevel (verbose, info, debug, warning, error)
          console.minLevel = .error
          */
-        console.minLevel = .error
+        console.minLevel = .verbose
 //        console.minLevel = .debug
         
         /*

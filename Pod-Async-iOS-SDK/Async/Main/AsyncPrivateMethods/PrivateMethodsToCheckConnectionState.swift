@@ -14,12 +14,7 @@ extension Async {
     
     // MARK: - Instantiate Timer
     func startTimers() {
-        checkIfSocketHasOpennedTimeoutIdTimer = RepeatingTimer(timeInterval: 65)
-        checkIfSocketHasOpennedTimeoutIdTimer?.eventHandler = {
-            self.checkIfSocketIsCloseOrNot()
-            self.checkIfSocketHasOpennedTimeoutIdTimer?.suspend()
-        }
-        checkIfSocketHasOpennedTimeoutIdTimer?.resume()
+        checkIfSocketHasOpennedTimer = RepeatingTimer(timeInterval: 65)
     }
     
     
