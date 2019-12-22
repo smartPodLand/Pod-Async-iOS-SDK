@@ -98,7 +98,7 @@ extension Async {
         oldPeerId = peerId
         isDeviceRegister = false
         isSocketOpen = false
-        registerServerTimeoutIdTimer?.suspend()
+        registerServerTimer?.suspend()
         socket?.connect()
     }
     
@@ -130,7 +130,7 @@ extension Async {
         isDeviceRegister = false
         isSocketOpen = false
         pushSendDataArr = []
-        registerServerTimeoutIdTimer?.suspend()
+        registerServerTimer?.suspend()
         socketState = socketStateType.CLOSED
         delegate?.asyncStateChanged(socketState:        socketState.rawValue,
                                     timeUntilReconnect: 0,
