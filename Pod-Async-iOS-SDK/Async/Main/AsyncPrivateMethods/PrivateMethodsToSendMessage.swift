@@ -46,12 +46,7 @@ extension Async {
         let contentStr = "\(content)"
         pushSendData(type: asyncMessageType.SERVER_REGISTER.rawValue, content: contentStr)
         
-        registerServerTimeoutIdTimer = RepeatingTimer(timeInterval: TimeInterval(connectionRetryInterval))
-        registerServerTimeoutIdTimer?.eventHandler = {
-            self.self.retryToRegisterServer()
-            self.registerServerTimeoutIdTimer?.suspend()
-        }
-        registerServerTimeoutIdTimer?.resume()
+        registerServerTimer = RepeatingTimer(timeInterval: TimeInterval(connectionRetryInterval))
     }
     
     
@@ -63,29 +58,7 @@ extension Async {
      then if the socket connection state was "OPEN", send the data
      */
     func sendData(type: Int, content: String?) {
-        self.lastSentMessageTimeoutIdTimer?.suspend()
-        if let _ = self.lastSentMessageTimeoutIdTimer {
-            self.lastSentMessageTimeoutIdTimer = nil
-        }
-        DispatchQueue.global().async {
-            self.lastSentMessageTime = Date()
-            self.lastSentMessageTimeoutIdTimer = RepeatingTimer(timeInterval: TimeInterval(self.connectionCheckTimeout))
-            self.lastSentMessageTimeoutIdTimer?.eventHandler = {
-                if let lastSendMessageTimeBanged = self.lastSentMessageTime {
-                    let elapsed = Date().timeIntervalSince(lastSendMessageTimeBanged)
-                    let elapsedInt = Int(elapsed)
-                    if (elapsedInt >= self.connectionCheckTimeout) {
-                        DispatchQueue.main.async {
-                            self.asyncSendPing()
-                        }
-                        if let _ = self.lastSentMessageTimeoutIdTimer {
-                            self.lastSentMessageTimeoutIdTimer?.suspend()
-                        }
-                    }
-                }
-            }
-            self.lastSentMessageTimeoutIdTimer?.resume()
-        }
+        lastSentMessageTimer = RepeatingTimer(timeInterval: TimeInterval(self.connectionCheckTimeout))
         
         if (socketState == socketStateType.OPEN) {
             var message: JSON

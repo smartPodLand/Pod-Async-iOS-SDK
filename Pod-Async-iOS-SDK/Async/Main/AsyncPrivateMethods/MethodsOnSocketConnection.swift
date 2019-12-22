@@ -21,9 +21,9 @@ extension Async {
         log.verbose("Handle On Oppend Socket", context: "Async")
         
         DispatchQueue.global().async {
-            self.checkIfSocketHasOpennedTimeoutIdTimer?.suspend()
-            self.socketReconnectRetryIntervalTimer?.suspend()
-            self.socketReconnectCheckTimer?.suspend()
+            self.checkIfSocketHasOpennedTimer?.suspend()
+//            self.socketReconnectRetryIntervalTimer?.suspend()
+//            self.socketReconnectCheckTimer?.suspend()
         }
         isSocketOpen = true
         delegate?.asyncConnect(newPeerID: peerId)
@@ -69,20 +69,7 @@ extension Async {
                                         serverRegister:     isServerRegister,
                                         peerId:             peerId)
             
-            t = RepeatingTimer(timeInterval: retryStep)
-            t.eventHandler = {
-                if (self.retryStep < 60) {
-                    self.retryStep = self.retryStep * 2
-                }
-                DispatchQueue.main.async {
-                    log.verbose("try to connect to the socket on the main threat", context: "Async")
-                    
-                    self.socket?.connect()
-                    self.t.suspend()
-                }
-            }
-            t.resume()
-            
+            retryToConnectToSocketTimer = RepeatingTimer(timeInterval: retryStep)
             
         } else {
             delegate?.asyncError(errorCode:     4005,
@@ -161,23 +148,7 @@ extension Async {
     
     // Close Socket connection if needed
     func handleIfNeedsToCloseTheSocket() {
-        self.lastReceivedMessageTimeoutId?.suspend()
-        DispatchQueue.global().async {
-            self.lastReceivedMessageTimeoutId = RepeatingTimer(timeInterval: (TimeInterval(self.connectionCheckTimeout) * 1.5))
-            self.lastReceivedMessageTimeoutId?.eventHandler = {
-                if let lastReceivedMessageTimeBanged = self.lastReceivedMessageTime {
-                    let elapsed = Date().timeIntervalSince(lastReceivedMessageTimeBanged)
-                    let elapsedInt = Int(elapsed)
-                    if (elapsedInt >= self.connectionCheckTimeout) {
-                        DispatchQueue.main.async {
-                            self.socket?.disconnect()
-                        }
-                        self.lastReceivedMessageTimeoutId?.suspend()
-                    }
-                }
-            }
-            self.lastReceivedMessageTimeoutId?.resume()
-        }
+        lastReceivedMessageTimer = RepeatingTimer(timeInterval: (TimeInterval(self.connectionCheckTimeout) * 1.5))
     }
     
     // MARK: - Sends Ping Message
