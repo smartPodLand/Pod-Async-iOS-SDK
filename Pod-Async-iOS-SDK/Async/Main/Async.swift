@@ -128,9 +128,6 @@ public class Async {
         didSet {
             
             self.lastSentMessageTimer?.suspend()
-            if let _ = self.lastSentMessageTimer {
-                self.lastSentMessageTimer = nil
-            }
             DispatchQueue.global().async {
                 self.lastSentMessageTime = Date()
                 self.lastSentMessageTimer?.eventHandler = {
