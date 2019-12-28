@@ -58,7 +58,9 @@ extension Async {
      then if the socket connection state was "OPEN", send the data
      */
     func sendData(type: Int, content: String?) {
-        lastSentMessageTimer = RepeatingTimer(timeInterval: TimeInterval(self.connectionCheckTimeout))
+        DispatchQueue.main.async {
+            self.lastSentMessageTimer = RepeatingTimer(timeInterval: TimeInterval(self.connectionCheckTimeout))
+        }
         
         if (socketState == socketStateType.OPEN) {
             var message: JSON
