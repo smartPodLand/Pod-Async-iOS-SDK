@@ -28,7 +28,8 @@ public class Async {
     var messageTtl:             Int         //
     var reconnectOnClose:       Bool        // should i try to reconnet the socket whenever socket is close?
     var connectionRetryInterval:Int         // how many times to try to connet the socket
-     
+    var maxReconnectTimeInterval: Int
+    
     // MARK: - Async initializer
     public init(socketAddress:      String,
                 serverName:         String,
@@ -37,6 +38,7 @@ public class Async {
                 peerId:             Int?,
                 messageTtl:         Int?,
                 connectionRetryInterval: Int?,
+                maxReconnectTimeInterval: Int?,
                 reconnectOnClose:   Bool?) {
         
         self.socketAddress = socketAddress
@@ -67,6 +69,12 @@ public class Async {
             self.reconnectOnClose = theReconnectOnClose
         } else {
             self.reconnectOnClose = true
+        }
+        
+        if let maxReconnectTime = maxReconnectTimeInterval {
+            self.maxReconnectTimeInterval = maxReconnectTime
+        } else {
+            self.maxReconnectTimeInterval = 60
         }
         
     }
@@ -158,11 +166,13 @@ public class Async {
         didSet {
             
             retryToConnectToSocketTimer.eventHandler = {
-                if (self.retryStep < 60) {
+                if (self.retryStep < Double(self.maxReconnectTimeInterval)) {
                     self.retryStep = self.retryStep * 2
+                } else {
+                    self.retryStep = Double(self.maxReconnectTimeInterval)
                 }
                 DispatchQueue.main.async {
-                    log.verbose("try to connect to the socket on the main threat", context: "Async")
+                    log.verbose("try to connect to the socket on the main threat. maxReconnectTimeInterval = \(self.maxReconnectTimeInterval), NextRetryStep = \(self.retryStep)", context: "Async")
                     
                     self.socket?.connect()
                     self.retryToConnectToSocketTimer.suspend()
