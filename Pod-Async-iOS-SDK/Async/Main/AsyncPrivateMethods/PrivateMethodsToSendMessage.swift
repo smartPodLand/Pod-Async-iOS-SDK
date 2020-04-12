@@ -46,6 +46,7 @@ extension Async {
         let contentStr = "\(content)"
         pushSendData(type: asyncMessageType.SERVER_REGISTER.rawValue, content: contentStr)
         
+        registerServerTimer = nil
         registerServerTimer = RepeatingTimer(timeInterval: TimeInterval(connectionRetryInterval))
     }
     
@@ -59,6 +60,7 @@ extension Async {
      */
     func sendData(type: Int, content: String?) {
         DispatchQueue.main.async {
+            self.lastSentMessageTimer = nil
             self.lastSentMessageTimer = RepeatingTimer(timeInterval: TimeInterval(self.connectionCheckTimeout))
         }
         
@@ -80,7 +82,7 @@ extension Async {
             
             let finalMessage = MakeCustomTextToSend(message: messageStr).removeSpecificCharectersWithSpace()
             
-            log.verbose("this message sends through socket: \n \(finalMessage)", context: "Async")
+            log.debug("this message sends through socket: \n \(finalMessage)", context: "Async")
             
             socket?.write(string: finalMessage)
         }

@@ -69,6 +69,7 @@ extension Async {
                                         serverRegister:     isServerRegister,
                                         peerId:             peerId)
             
+            retryToConnectToSocketTimer = nil
             retryToConnectToSocketTimer = RepeatingTimer(timeInterval: retryStep)
             
         } else {
@@ -99,6 +100,7 @@ extension Async {
      */
     func handleOnRecieveMessage(messageRecieved: String) {
         log.verbose("This Message Recieves from socket: \n\(messageRecieved)", context: "Async - RecieveFromSocket")
+        
         lastReceivedMessageTime = Date()
         
         if let dataFromMsgString = messageRecieved.data(using: .utf8, allowLossyConversion: false) {
@@ -148,6 +150,7 @@ extension Async {
     
     // Close Socket connection if needed
     func handleIfNeedsToCloseTheSocket() {
+        lastReceivedMessageTimer = nil
         lastReceivedMessageTimer = RepeatingTimer(timeInterval: (TimeInterval(self.connectionCheckTimeout) * 1.5))
     }
     
@@ -193,7 +196,8 @@ extension Async {
             sendDataFromQueueToSocekt()
             delegate?.asyncReady()
         } else {
-            log.verbose("Device has Registered successfully", context: "Async")
+            
+            log.info("Device has Registered successfully", context: "Async")
             registerServer()
         }
     }
@@ -217,7 +221,7 @@ extension Async {
                                             serverRegister:     isServerRegister,
                                             peerId:             peerId)
                 
-                log.verbose("Server has Registered successfully", context: "Async")
+                log.info("Server has Registered successfully", context: "Async")
                 
                 delegate?.asyncReady()
                 sendDataFromQueueToSocekt()
